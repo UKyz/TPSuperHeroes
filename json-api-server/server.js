@@ -15,13 +15,13 @@ const APIError = API.types.Error;
 mongoose.connect(dbURL, {useMongoClient: true});
 
 const models = {
-  Author: require('./models/author').model,
-  Book: require('./models/book').model
+  Hero: require('./models/hero').model,
+  Villain: require('./models/villain').model
 };
 
 const registryTemplates = {
-  authors: require('./models/author').registry,
-  books: require('./models/book').registry
+  heroes: require('./models/hero').registry,
+  villains: require('./models/villain').registry
 };
 
 const adapter = new API.dbAdapters.Mongoose(models);
@@ -44,8 +44,8 @@ app.use((req, res, next) => {
 });
 
 const db = [
-  'books',
-  'authors'
+  'heroes',
+  'villains'
 ];
 
 app.options('*', (req, res) => {
