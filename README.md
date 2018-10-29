@@ -1,4 +1,4 @@
-# Chatbot-Project [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
+# TPSuperHeroes [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 ## Contents
   * [Install][Installation]
@@ -8,8 +8,8 @@
 ## Install
 
 ```
-git clone https://github.com/UKyz/Chatbot-Project.git
-cd Chatbot-Project
+git clone https://github.com/UKyz/TPSuper-Heroes.git
+cd TPSuperHeroes
 docker-compose up
 ```
 
