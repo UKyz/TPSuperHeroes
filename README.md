@@ -8,7 +8,7 @@
 ## Install
 
 ```
-git clone https://github.com/UKyz/TPSuper-Heroes.git
+git clone https://github.com/UKyz/TPSuperHeroes.git
 cd TPSuperHeroes
 docker-compose up
 ```
