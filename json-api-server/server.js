@@ -10,11 +10,41 @@ const div_ = (a, b) => a / b;
 
 const nts = (fn, x, y) => String(fn(Number(x), Number(y)));
 
+/*const server = http.createServer((req, res) => {
+ const urlRequest = url.parse(req.url, true, true);
+
+ if (urlRequest.pathname === '/add') {
+ res.end(nts(add_, urlRequest.query.var1, urlRequest.query.var2));
+ } else if (urlRequest.pathname === '/sub') {
+ res.end(nts(sub_, urlRequest.query.var1, urlRequest.query.var2));
+ } else if (urlRequest.pathname === '/mul') {
+ res.end(nts(mul_, urlRequest.query.var1, urlRequest.query.var2));
+ } else if (urlRequest.pathname === '/div') {
+ res.end(nts(div_, urlRequest.query.var1, urlRequest.query.var2));
+ }
+ res.end('404');
+ });
+
+ server.listen(3000);*/
+
 /* ---- express ---- */
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
+/*mongoose.connect(process.env.DB || 'mongodb://localhost:27017/deco-test',
+  {useNewUrlParser: true});
+
+const blobSchema = new mongoose.Schema({
+  blob: Object
+});
+
+const Blob = mongoose.model('Blob', blobSchema);
+const app = express();
+app.use(bodyParser.json());*/
+
+const app = express();
 
 app.get('/add', (req, res) => {
   res.status(200).send({result : nts(add_, req.query.var1, req.query.var2)});
