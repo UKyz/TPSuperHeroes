@@ -1,0 +1,24 @@
+{
+  "name": "TPSuperHeroes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/UKyz/TPSuperHeroes.git",
+  "author": "UKyz <ukyz@icloud.com>",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "xo": "^0.23.0"
+  },
+  "xo": {
+    "esnext": true,
+    "space": 2,
+    "rules": {
+      "max-len": [
+        "error",
+        80,
+        2
+      ]
+    }
+  }
+}
