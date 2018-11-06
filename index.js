@@ -1,20 +1,31 @@
 const rp = require('request-promise');
 
-const add = (var1, var2, server) => {
-  rp(`http://localhost:${server}/add?var1=${var1}&var2=${var2}`)
+const newHero = (name, age) => {
+  rp(`http://localhost:1338/createNewHero?name=${name}&age=${age}`);
+};
+
+const newVillain = (name, age) => {
+  rp(`http://localhost:1337/createNewVillain?name=${name}&age=${age}`);
+};
+
+const getVillains = () => {
+  rp({uri: 'http://localhost:1337/getListVillains', json: true})
     .then(body => {
-      console.log(body);
+      console.log(body.result);
     });
 };
 
-add(2, 3, 1338);
+const getHeroes = () => {
+  rp({uri: 'http://localhost:1338/getListHeroes', json: true})
+    .then(body => {
+      console.log(body.result);
+    });
+};
 
-add(2, 3, 1337);
+newHero('Alexia', '23');
 
-rp(`http://localhost:1337/create?var1=Alexia&var2=23`)
-  .then();
+getHeroes();
 
-rp(`http://localhost:1337/tab`)
-  .then(body => {
-    console.log(body);
-  });
+newVillain('Pas Beau', '104');
+
+getVillains();

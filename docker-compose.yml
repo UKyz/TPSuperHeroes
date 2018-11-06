@@ -1,7 +1,7 @@
 version: '3'
 services:
-  api:
-    build: ./json-api-server
+  server_villain:
+    build: villain
     environment:
       - PORT=8080
       - BASE_URL=http://127.0.0.1:8080/api
@@ -9,8 +9,8 @@ services:
     ports:
       - "1337:8080"
 
-  api_2:
-      build: ./json-api-server2
+  server_hero:
+      build: hero
       environment:
         - PORT=8081
         - BASE_URL=http://127.0.0.1:8081/api
