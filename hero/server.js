@@ -1,8 +1,10 @@
-const createNewHero = (name, age) => listHeroes.push({name, age});
+const express = require('express');
+
+const {Hero} = require('./hero.js');
+
+const createNewHero = name => listHeroes.push(new Hero(name));
 
 /* ---- express ---- */
-
-const express = require('express');
 
 const app = express();
 
@@ -13,7 +15,7 @@ app.get('/getListHeroes', (req, res) => {
 });
 
 app.get('/createNewHero', (req, res) => {
-  res.status(200).send({result: createNewHero(req.query.name, req.query.age)});
+  res.status(200).send({result: createNewHero(req.query.name)});
 });
 
 app.listen(process.env.PORT);

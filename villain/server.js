@@ -1,8 +1,10 @@
-const createNewVillain = (name, age) => listVillains.push({name, age});
+const express = require('express');
+
+const {Villain} = require('./villain.js');
+
+const createNewVillain = name => listVillains.push(new Villain(name));
 
 /* ---- express ---- */
-
-const express = require('express');
 
 const app = express();
 
@@ -14,7 +16,7 @@ app.get('/getListVillains', (req, res) => {
 
 app.get('/createNewVillain', (req, res) => {
   res.status(200).send({
-    result: createNewVillain(req.query.name, req.query.age)
+    result: createNewVillain(req.query.name)
   });
 });
 
