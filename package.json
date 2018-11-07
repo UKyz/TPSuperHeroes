@@ -5,12 +5,24 @@
   "repository": "https://github.com/UKyz/TPSuperHeroes.git",
   "author": "UKyz <ukyz@icloud.com>",
   "license": "MIT",
+  "scripts": {
+    "code-style": "xo"
+  },
   "dependencies": {
     "request": "^2.88.0",
-    "request-promise": "^4.2.2",
-    "xo": "^0.23.0"
+    "request-promise": "^4.2.2"
   },
+  "devDependencies": {
+    "xo": "^0.23.0",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "code-style"
+  ],
   "xo": {
+    "envs": [
+      "node"
+    ],
     "esnext": true,
     "space": 2,
     "rules": {
