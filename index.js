@@ -22,10 +22,11 @@ const getHeroes = () => {
     });
 };
 
-newHero('Alexia', '23');
+const main = () => {
+  newHero('Alexia', '23');
+  getHeroes();
+  newVillain('Pas Beau', '104');
+  getVillains();
+};
 
-getHeroes();
-
-newVillain('Pas Beau', '104');
-
-getVillains();
+main();
