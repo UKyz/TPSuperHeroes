@@ -3,8 +3,8 @@
 ## Contents
   * [Install][Installation]
   * [Contribute][Contribute]
-   * [Check the code style][CheckXo]
-   * [Execute the tests][CheckTests]
+    * [Execute the tests][CheckTests]
+    * [Check the code style][CheckXo]
   * [Credits][Credits]
 
 ## Install
