@@ -10,8 +10,20 @@ class Villain {
     return this.name_;
   }
 
+  get speed() {
+    return this.speed_;
+  }
+
+  get position() {
+    return this.pos_;
+  }
+
+  get score() {
+    return this.score_;
+  }
+
   changePosition(position) {
-    this.position_ = position;
+    this.pos_ = position;
   }
 
   noPainNoGain(gain) {
