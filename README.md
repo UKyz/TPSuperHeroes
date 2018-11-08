@@ -2,7 +2,9 @@
 
 ## Contents
   * [Install][Installation]
-  * [Check the code style][CheckXo]
+  * [Contribute][Contribute]
+   * [Check the code style][CheckXo]
+   * [Execute the tests][CheckTests]
   * [Credits][Credits]
 
 ## Install
@@ -11,6 +13,16 @@
 git clone https://github.com/UKyz/TPSuperHeroes.git
 cd TPSuperHeroes
 docker-compose up
+```
+
+## Contribute 
+### Execute the tests
+  This project is based on the BDD method. Every classes has a test file to test what's required to be executed. The test can also show a bogue when the class is modified. [(See what BDD is)][BDDWiki]
+  
+  To test every classes : 
+  
+```bash
+mocha
 ```
 
 ### Check the code style
@@ -33,4 +45,7 @@ xo
 [xo]: https://github.com/xojs/xo
 [Credits]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#credits
 [Installation]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#install
+[Contribute]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#contribute
 [CheckXo]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#check-the-code-style
+[CheckTests]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#execute-the-tests
+[BDDWiki]: https://en.wikipedia.org/wiki/Behavior-driven_development
