@@ -6,6 +6,10 @@ class Villain {
     this.score_ = 0;
   }
 
+  get name() {
+    return this.name_;
+  }
+
   changePosition(position) {
     this.position_ = position;
   }
