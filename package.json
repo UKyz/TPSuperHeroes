@@ -6,22 +6,27 @@
   "author": "UKyz <ukyz@icloud.com>",
   "license": "MIT",
   "scripts": {
-    "code-style": "xo"
+    "code-style": "xo",
+    "start": "node index.js",
+    "test": "mocha"
   },
   "dependencies": {
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "pre-commit": "^1.2.2",
     "xo": "^0.23.0",
-    "pre-commit": "^1.2.2"
+    "chai": "^4.2.0"
   },
   "pre-commit": [
-    "code-style"
+    "code-style",
+    "test"
   ],
   "xo": {
     "envs": [
-      "node"
+      "node",
+      "mocha"
     ],
     "esnext": true,
     "space": 2,
