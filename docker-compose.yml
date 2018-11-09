@@ -1,19 +1,20 @@
 version: '3'
 services:
-  server_villain:
-    build: villain
+  villain:
+    build: villain/
     environment:
-      - PORT=8080
-      - BASE_URL=http://127.0.0.1:8080/api
-      - SUFFIX_URL={ownerId}/relationships/{path}
+      - PORT=3000
+      - HERO_URL=http://hero:3000/
     ports:
-      - "1337:8080"
+      - "3010:3000"
 
-  server_hero:
-      build: hero
-      environment:
-        - PORT=8081
-        - BASE_URL=http://127.0.0.1:8081/api
-        - SUFFIX_URL={ownerId}/relationships/{path}
-      ports:
-        - "1338:8081"
+  hero:
+    build: hero/
+    environment:
+    - PORT=3000
+    - VILLAIN_URL=http://villain:3000/
+    ports:
+    - "3020:3000"
+
+networks:
+  poneys:
