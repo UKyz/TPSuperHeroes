@@ -8,6 +8,10 @@ const newVillain = (name, age) => {
   rp(`http://localhost:3010/createNewVillain?name=${name}&age=${age}`);
 };
 
+const newMount = (name, position) => {
+  rp(`http://localhost:3040/createNewMount?name=${name}&position=${position}`);
+};
+
 const getVillains = () => {
   rp({uri: 'http://localhost:3010/getListVillains', json: true})
     .then(body => {
@@ -29,6 +33,13 @@ const getCities = () => {
     });
 };
 
+const getMounts = () => {
+  rp({uri: 'http://localhost:3040/getListMounts', json: true})
+    .then(body => {
+      console.log(body.result);
+    });
+};
+
 const getLocalizationCity = city => {
   rp({uri: `http://localhost:3030/getLocalizationCity?name=${city}`,
     json: true})
@@ -44,6 +55,8 @@ const main = () => {
   getVillains();
   getCities();
   getLocalizationCity('Brest');
+  newMount('Bibou', 'Bruxelle');
+  getMounts();
 };
 
 main();
