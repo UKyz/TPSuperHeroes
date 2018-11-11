@@ -1,0 +1,19 @@
+service: sls-test
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  add:
+    handler: add.addHandler
+    events:
+      - http: POST /add
+
+  sub:
+      handler: sub.subHandler
+      events:
+        - http: POST /sub
+
+plugins:
+- serverless-offline
