@@ -1,0 +1,13 @@
+{
+  "name": "sls-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "serverless offline start --host 0.0.0.0"
+  },
+  "dependencies": {
+    "serverless": "^1.32.0",
+    "serverless-offline": "^3.31.2"
+  }
+}
