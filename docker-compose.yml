@@ -5,16 +5,18 @@ services:
     environment:
       - PORT=3000
       - HERO_URL=http://hero:3000/
+      - CITY_URL=http://city:3000/
     ports:
       - "3010:3000"
 
   hero:
     build: hero/
     environment:
-    - PORT=3000
-    - VILLAIN_URL=http://villain:3000/
+      - PORT=3000
+      - VILLAIN_URL=http://villain:3000/
+      - CITY_URL=http://city:3000/
     ports:
-    - "3020:3000"
+      - "3020:3000"
 
   test:
       build: sls-test/
@@ -25,5 +27,14 @@ services:
       ports:
       - "3030:3000"
 
-networks:
-  poneys:
+  networks:
+    poneys:
+  
+  city:
+    build: city/
+    environment:
+      - PORT=3000
+      - VILLAIN_URL=http://villain:3000/
+      - HERO_URL=http://hero:3000/
+    ports:
+      - "3030:3000"

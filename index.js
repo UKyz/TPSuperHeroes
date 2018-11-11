@@ -22,11 +22,28 @@ const getHeroes = () => {
     });
 };
 
+const getCities = () => {
+  rp({uri: 'http://localhost:3030/getListCities', json: true})
+    .then(body => {
+      console.log(body.result);
+    });
+};
+
+const getLocalizationCity = city => {
+  rp({uri: `http://localhost:3030/getLocalizationCity?name=${city}`,
+    json: true})
+    .then(body => {
+      console.log(body.result);
+    });
+};
+
 const main = () => {
   newHero('Alexia', '23');
   getHeroes();
   newVillain('Pas Beau', '104');
   getVillains();
+  getCities();
+  getLocalizationCity('Brest');
 };
 
 main();
