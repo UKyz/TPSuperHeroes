@@ -3,50 +3,60 @@ services:
   villain:
     build: villain/
     environment:
-      - PORT=3000
-      - HERO_URL=http://hero:3000/
-      - CITY_URL=http://city:3000/
+    - PORT=3000
+    - HERO_URL=http://hero:3000/
+    - CITY_URL=http://city:3000/
     ports:
-      - "3010:3000"
+    - "3010:3000"
 
   hero:
     build: hero/
     environment:
-      - PORT=3000
-      - VILLAIN_URL=http://villain:3000/
-      - CITY_URL=http://city:3000/
+    - PORT=3000
+    - VILLAIN_URL=http://villain:3000/
+    - CITY_URL=http://city:3000/
     ports:
-      - "3020:3000"
-  
+    - "3020:3000"
+
   city:
     build: city/
     environment:
-      - PORT=3000
-      - VILLAIN_URL=http://villain:3000/
-      - HERO_URL=http://hero:3000/
+    - PORT=3000
+    - VILLAIN_URL=http://villain:3000/
+    - HERO_URL=http://hero:3000/
     ports:
-      - "3030:3000"
+    - "3030:3000"
+
+  mount:
+    build: mount/
+    environment:
+    - PORT=3000
+    - VILLAIN_URL=http://villain:3000/
+    - HERO_URL=http://hero:3000/
+    - CITY_URL=http://city:3000/
+    ports:
+    - "3040:3000"
 
   test:
     build: sls-test/
     environment:
-      - PORT=3000
-      - HERO_URL=http://hero:3000/
-      - VILLAIN_URL=http://villain:3000/
+    - PORT=3000
+    - HERO_URL=http://hero:3000/
+    - VILLAIN_URL=http://villain:3000/
     ports:
-      - "3040:3000"
+    - "3050:3000"
 
   api:
-      build: db
-      depends_on:
-        - db
-      environment:
-        - DB=mongodb://db:27017/db
-        - PORT=8080
-      ports:
-        - "1337:8080"
+    build: db
+    depends_on:
+    - db
+    environment:
+    - DB=mongodb://db:27017/db
+    - PORT=8080
+    ports:
+    - "1337:8080"
 
   db:
-   image: mongo
-   ports:
-     - "27027:27017"
+    image: mongo
+    ports:
+    - "27027:27017"
