@@ -5,15 +5,25 @@ provider:
   runtime: nodejs8.10
 
 functions:
-  add:
-    handler: add.addHandler
+  newHero:
+    handler: src/hero.newHero
     events:
-      - http: POST /add
+      - http: POST /newHero
 
-  sub:
-      handler: sub.subHandler
-      events:
-        - http: POST /sub
+  newVillain:
+    handler: src/villain.newVillain
+    events:
+      - http: POST /newVillain
+
+  newCity:
+    handler: src/city.newCity
+    events:
+      - http: POST /newCity
+
+  newMount:
+    handler: src/mount.newMount
+    events:
+      - http: POST /newMount
 
 plugins:
 - serverless-offline

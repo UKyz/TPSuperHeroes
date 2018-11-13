@@ -1,6 +1,6 @@
 const chai = require('chai');
 
-const {Mount} = require('./../mount/mount.js');
+const {Mount} = require('./../sls-test/classes/mount.js');
 
 chai.should();
 

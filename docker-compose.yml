@@ -1,42 +1,5 @@
 version: '3'
 services:
-  villain:
-    build: villain/
-    environment:
-    - PORT=3000
-    - HERO_URL=http://hero:3000/
-    - CITY_URL=http://city:3000/
-    ports:
-    - "3010:3000"
-
-  hero:
-    build: hero/
-    environment:
-    - PORT=3000
-    - VILLAIN_URL=http://villain:3000/
-    - CITY_URL=http://city:3000/
-    ports:
-    - "3020:3000"
-
-  city:
-    build: city/
-    environment:
-    - PORT=3000
-    - VILLAIN_URL=http://villain:3000/
-    - HERO_URL=http://hero:3000/
-    ports:
-    - "3030:3000"
-
-  mount:
-    build: mount/
-    environment:
-    - PORT=3000
-    - VILLAIN_URL=http://villain:3000/
-    - HERO_URL=http://hero:3000/
-    - CITY_URL=http://city:3000/
-    ports:
-    - "3040:3000"
-
   test:
     build: sls-test/
     environment:

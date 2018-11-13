@@ -1,8 +1,8 @@
 class City {
   constructor(name, longitude, latitude) {
     this.name_ = name || 'UNKNOWNCITY';
-    this.longitude_ = longitude;
-    this.latitude_ = latitude;
+    this.longitude_ = longitude || 50;
+    this.latitude_ = latitude || 50;
   }
 
   get name() {
