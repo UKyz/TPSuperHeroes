@@ -1,4 +1,4 @@
-service: sls-test
+service: sls
 
 provider:
   name: aws

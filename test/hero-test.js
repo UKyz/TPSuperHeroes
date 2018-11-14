@@ -1,6 +1,6 @@
 const chai = require('chai');
 
-const {Hero} = require('./../sls-test/classes/hero.js');
+const {Hero} = require('../sls/classes/hero.js');
 
 chai.should();
 
