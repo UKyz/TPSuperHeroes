@@ -1,7 +1,7 @@
 version: '3'
 services:
   test:
-    build: sls-test/
+    build: sls/
     environment:
     - PORT=3000
     - HERO_URL=http://hero:3000/

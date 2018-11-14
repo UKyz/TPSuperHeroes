@@ -1,6 +1,6 @@
 const chai = require('chai');
 
-const {City} = require('./../sls-test/classes/city.js');
+const {City} = require('../sls/classes/city.js');
 
 chai.should();
 
