@@ -3,7 +3,7 @@ class Mount {
     this.name_ = name || 'Tornado';
     this.speed_ = speed || 50;
     this.pos_ = pos || 'Paris';
-    this.endurance_ = endurance || endurance;
+    this.endurance_ = endurance || 100;
   }
 
   get name() {
