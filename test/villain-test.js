@@ -14,14 +14,19 @@ describe('villain.js', () => {
     v1.score.should.be.equal(0);
   });
 
-  /* -it('should change values of a hero', () => {
+  it('should change the score of a villain', () => {
     v1.noPainNoGain(10);
-    v1.changePosition('Lille');
-    v1.setSpeed(5);
-
-    v1.speed.should.be.equal(5);
-    v1.position.should.be.equal('Lille');
     v1.score.should.be.equal(10);
-  }); */
+  });
+
+  it('should change the position of a villain', () => {
+    v1.changePosition('Lille');
+    v1.position.should.be.equal('Lille');
+  });
+
+  it('should change the speed of a villain', () => {
+    v1.setSpeed(5);
+    v1.speed.should.be.equal(5);
+  });
 });
 
