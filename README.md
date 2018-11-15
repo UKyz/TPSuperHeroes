@@ -3,16 +3,23 @@
 ## Contents
   * [Install][Installation]
   * [Contribute][Contribute]
+  * [Stop][Stop]
     * [Execute the tests][CheckTests]
     * [Check the code style][CheckXo]
   * [Credits][Credits]
 
 ## Install
 
-```
+```bash
 git clone https://github.com/UKyz/TPSuperHeroes.git
 cd TPSuperHeroes
 docker-compose up
+```
+
+## Stop and remove containers
+
+```bash
+docker-compose down
 ```
 
 ## Contribute 
@@ -45,6 +52,7 @@ xo
 [xo]: https://github.com/xojs/xo
 [Credits]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#credits
 [Installation]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#install
+[Stop]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#stop-and-remove-containers
 [Contribute]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#contribute
 [CheckXo]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#check-the-code-style
 [CheckTests]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#execute-the-tests

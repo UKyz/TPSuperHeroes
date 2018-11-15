@@ -1,33 +1,33 @@
 class Mount {
-  constructor(name = 'Tornado', speed = 50, pos = 'Paris', endurance = 100) {
-    this._name = name;
-    this._speed = speed;
-    this._pos = pos;
-    this._endurance = endurance;
+  constructor(name, speed, pos, endurance) {
+    this.name_ = name || 'Tornado';
+    this.speed_ = speed || 50;
+    this.pos_ = pos || 'Paris';
+    this.endurance_ = endurance || endurance;
   }
 
   get name() {
-    return this._name;
+    return this.name_;
   }
 
   get speed() {
-    return this._speed;
+    return this.speed_;
   }
 
   get pos() {
-    return this._pos;
+    return this.pos_;
   }
 
   set pos(value) {
-    this._pos = value;
+    this.pos_ = value;
   }
 
   get endurance() {
-    return this._endurance;
+    return this.endurance_;
   }
 
   set endurance(value) {
-    this._endurance = value;
+    this.endurance_ = value;
   }
 }
 
