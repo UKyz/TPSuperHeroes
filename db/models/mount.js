@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
 
-const heroSchema = new Schema({
+const mountSchema = new Schema({
   name_: String,
   speed_: Number,
   pos_: String,
-  score_: Number
+  endurance_: Number
 });
 
 module.exports = {
-  schema: heroSchema
+  schema: mountSchema
 };

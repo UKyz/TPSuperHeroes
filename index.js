@@ -1,62 +1,46 @@
 const rp = require('request-promise');
 
-const newHero = (name, age) => {
-  rp(`http://localhost:3020/createNewHero?name=${name}&age=${age}`);
-};
-
-const newVillain = (name, age) => {
-  rp(`http://localhost:3010/createNewVillain?name=${name}&age=${age}`);
-};
-
-const newMount = (name, position) => {
-  rp(`http://localhost:3040/createNewMount?name=${name}&position=${position}`);
-};
-
-const getVillains = () => {
-  rp({uri: 'http://localhost:3010/getListVillains', json: true})
-    .then(body => {
-      console.log(body.result);
+const newHero = name => {
+  rp({method: 'POST', uri: 'http://localhost:3050/newHero',
+    body: {name: `${name}`}, json: true})
+    .then(hero => {
+      rp({method: 'POST', uri: 'http://localhost:3010/newHero',
+        body: hero, json: true}).then(res => console.log(res));
     });
 };
 
-const getHeroes = () => {
-  rp({uri: 'http://localhost:3020/getListHeroes', json: true})
-    .then(body => {
-      console.log(body.result);
+const newVillain = name => {
+  rp({method: 'POST', uri: 'http://localhost:3050/newVillain',
+    body: {name: `${name}`}, json: true})
+    .then(villain => {
+      rp({method: 'POST', uri: 'http://localhost:3010/newVillain',
+        body: villain, json: true}).then(res => console.log(res));
     });
 };
 
-const getCities = () => {
-  rp({uri: 'http://localhost:3030/getListCities', json: true})
-    .then(body => {
-      console.log(body.result);
+const newCity = name => {
+  rp({method: 'POST', uri: 'http://localhost:3050/newCity',
+    body: {name: `${name}`}, json: true})
+    .then(city => {
+      rp({method: 'POST', uri: 'http://localhost:3010/newCity',
+        body: city, json: true}).then(res => console.log(res));
     });
 };
 
-const getMounts = () => {
-  rp({uri: 'http://localhost:3040/getListMounts', json: true})
-    .then(body => {
-      console.log(body.result);
-    });
-};
-
-const getLocalizationCity = city => {
-  rp({uri: `http://localhost:3030/getLocalizationCity?name=${city}`,
-    json: true})
-    .then(body => {
-      console.log(body.result);
+const newMount = name => {
+  rp({method: 'POST', uri: 'http://localhost:3050/newMount',
+    body: {name: `${name}`}, json: true})
+    .then(city => {
+      rp({method: 'POST', uri: 'http://localhost:3010/newMount',
+        body: city, json: true}).then(res => console.log(res));
     });
 };
 
 const main = () => {
-  newHero('Alexia', '23');
-  getHeroes();
-  newVillain('Pas Beau', '104');
-  getVillains();
-  getCities();
-  getLocalizationCity('Brest');
-  newMount('Bibou', 'Bruxelle');
-  getMounts();
+  newHero('Victor');
+  newVillain('Maxime');
+  newCity('Paris');
+  newMount('Petit Tonnerre');
 };
 
 main();

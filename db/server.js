@@ -1,59 +1,70 @@
 const mongoose = require('mongoose');
 
+const express = require('express');
+
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+app.listen(3010);
+
 mongoose.connect(process.env.DB, {useNewUrlParser: true});
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  /* --- Heroes --- */
+/* --- Heroes --- */
 
-  const heroSchema = require('./models/hero').schema;
+const heroSchema = require('./models/hero').schema;
 
-  heroSchema.methods.info = function () {
-    const greeting = `Name : ${this.name}`;
-    console.log(greeting);
-  };
+const HeroModel = mongoose.model('heroModel', heroSchema);
 
-  const HeroModel = mongoose.model('heroModel', heroSchema);
-
-  const superman = new HeroModel({name: 'Superman'});
-  superman.info();
-
-  /* --- Villain --- */
-
-  const villainSchema = require('./models/villain').schema;
-
-  villainSchema.methods.info = function () {
-    const greeting = `Name : ${this.name}`;
-    console.log(greeting);
-  };
-
-  const VillainModel = mongoose.model('villainModel', villainSchema);
-
-  const maxime = new VillainModel({name: 'Maxime le Maudit'});
-  maxime.info();
-
-  /* --- City --- */
-
-  const citySchema = require('./models/city').schema;
-
-  citySchema.methods.info = function () {
-    const greeting = `Name : ${this.name}`;
-    console.log(greeting);
-  };
-
-  const CityModel = mongoose.model('cityModel', citySchema);
-
-  const paris = new CityModel({name: 'Paris'});
-  paris.info(); // "Meow name is fluffy"
-
-  /* fluffy.save(function (err, fluffy) {
-    if (err) return console.error(err);
-    fluffy.speak();
-  });
-
-  Kitten.find(function (err, kittens) {
-    if (err) return console.error(err);
-    console.log(kittens);
-  }); */
+app.post('/newHero', async (req, res) => {
+  await new HeroModel(req.body).save();
+  res.send('OK');
+  console.log(seeAllInDb(HeroModel));
 });
+
+/* --- Villain --- */
+
+const villainSchema = require('./models/villain').schema;
+
+const VillainModel = mongoose.model('villainModel', villainSchema);
+
+app.post('/newVillain', async (req, res) => {
+  await new VillainModel(req.body).save();
+  res.send('OK');
+  console.log(seeAllInDb(VillainModel));
+});
+
+/* --- City --- */
+
+const citySchema = require('./models/city').schema;
+
+const CityModel = mongoose.model('cityModel', citySchema);
+
+app.post('/newCity', async (req, res) => {
+  await new CityModel(req.body).save();
+  res.send('OK');
+  console.log(seeAllInDb(CityModel));
+});
+
+/* --- Mount --- */
+
+const mountSchema = require('./models/mount').schema;
+
+const MountModel = mongoose.model('mountModel', mountSchema);
+
+app.post('/newMount', async (req, res) => {
+  await new MountModel(req.body).save();
+  res.send('OK');
+  console.log(seeAllInDb(MountModel));
+});
+
+/* --- Functions --- */
+
+const seeAllInDb = Model => {
+  Model.find((err, data) => {
+    if (err) {
+      return console.error(err);
+    }
+    return data;
+  });
+};
