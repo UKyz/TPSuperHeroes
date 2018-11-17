@@ -4,8 +4,6 @@ services:
     build: ./sls
     environment:
     - PORT=3000
-    - HERO_URL=http://hero:3000/
-    - VILLAIN_URL=http://villain:3000/
     ports:
     - "3050:3000"
 
@@ -17,6 +15,13 @@ services:
     - DB=mongodb://db:27017/db
     ports:
     - "3010:3010"
+
+  confederation:
+    build: ./confederation
+    environment:
+    - PORT=3000
+    ports:
+    - "3020:3020"
 
   db:
     image: mongo
