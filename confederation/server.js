@@ -1,39 +1,41 @@
 const express = require('express');
 
+const rp = require('request-promise');
+
 const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
 
-app.get('/test', (req, res) => {
-  res.status(200).send({result: 3});
+app.get('/test', async (req, res) => {
+  await getListMovesHeroes(await getListCities());
+  res.status(200).send('OK');
 });
 
 const getListCities = () => {
-  // Requête Get pour chopper liste de tous les villains
-  // Garder seulement ville et nombre de méchant
-  // Trier et garder seulment les villes dans l'ordre décroissant du nombre de
-  // méchant
+  return rp({uri: `${process.env.API_DB}/getListCitiesVillains`,
+    json: true});
 };
 
 const getListAvailableHeroes = () => {
-  // Requête Get pour chopper liste de tous les héros qui ne sont pas en
-  // déplacement (where hero.pos_ ne contient pas le mot déplacement)
+  return rp(
+    {method: 'GET', uri: `${process.env.API_DB}/getListAvailableHeroes`});
 };
 
-const getListMovesHeroes = listCities => {
-  console.log(listCities);
+const getListMovesHeroes = async listCities => {
+  console.log(`list Cities : ${listCities}`);
   // Fonction d'opti
   // Choppe les héros available
-  const listAvailableHeroes = getListAvailableHeroes();
-  listAvailableHeroes.forEach(hero => {
+  const listAvailableHeroes = await getListAvailableHeroes();
+  console.log(`list Heroes: ${listAvailableHeroes}`);
+  /* -- listAvailableHeroes.forEach(hero => {
     console.log(hero);
     // Récupère les coordonnées de hero.position
     // Calculer la distance en km entre les deux positions
-  });
+  }); */
 };
 
-setInterval(() => {
+/* --setInterval(() => {
   const listCityVillain = getListCities();
   listCityVillain.forEach(city => {
     console.log(city);
@@ -44,6 +46,6 @@ setInterval(() => {
       // Créer un timeout pour dire qu'il est arrivé grace à elm.timeMove
     });
   });
-}, 20000);
+}, 20000); */
 
-app.listen(3020);
+app.listen(process.env.PORT);
