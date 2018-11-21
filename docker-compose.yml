@@ -2,28 +2,46 @@ version: '3'
 services:
   sls:
     build: ./sls
-    environment:
-    - PORT=3000
     ports:
     - "3050:3000"
+    environment:
+    - PORT=3050
+    - API_DB=http://api:3010
+    - API_CONFEDERATION=http://confederation:3020
+    networks:
+    - tpsuperheroes
 
   api:
     build: ./db
-    depends_on:
+    ports:
+    - "3010:3010"
+    links:
     - db
     environment:
     - DB=mongodb://db:27017/db
-    ports:
-    - "3010:3010"
+    - PORT=3010
+    - API_CONFEDERATION=http://confederation:3020
+    - API_SLS=http://sls:3050
+    networks:
+    - tpsuperheroes
 
   confederation:
     build: ./confederation
-    environment:
-    - PORT=3000
     ports:
     - "3020:3020"
+    environment:
+    - PORT=3020
+    - API_DB=http://api:3010
+    - API_SLS=http://sls:3050
+    networks:
+    - tpsuperheroes
 
   db:
     image: mongo
     ports:
     - "27027:27017"
+    networks:
+      - tpsuperheroes
+
+networks:
+  tpsuperheroes:

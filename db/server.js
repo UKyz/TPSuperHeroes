@@ -4,9 +4,11 @@ const express = require('express');
 
 const bodyParser = require('body-parser');
 
+const R = require('ramda');
+
 const app = express();
 app.use(bodyParser.json());
-app.listen(3010);
+app.listen(process.env.PORT);
 
 mongoose.connect(process.env.DB, {useNewUrlParser: true});
 
@@ -19,7 +21,16 @@ const HeroModel = mongoose.model('heroModel', heroSchema);
 app.post('/newHero', async (req, res) => {
   await new HeroModel(req.body).save();
   res.send('OK');
-  console.log(seeAllInDb(HeroModel));
+});
+
+app.get('/getListAvailableHeroes', async (req, res) => {
+  res.send(await HeroModel.find({pos_: {$not: /move/i}},
+    (err, heroes) => {
+      if (err) {
+        return console.error(err);
+      }
+      return heroes;
+    }));
 });
 
 /* --- Villain --- */
@@ -34,6 +45,15 @@ app.post('/newVillain', async (req, res) => {
   console.log(seeAllInDb(VillainModel));
 });
 
+app.get('/getListVillains', async (req, res) => {
+  res.send(await VillainModel.find((err, villains) => {
+    if (err) {
+      return console.error(err);
+    }
+    return villains;
+  }));
+});
+
 /* --- City --- */
 
 const citySchema = require('./models/city').schema;
@@ -44,6 +64,18 @@ app.post('/newCity', async (req, res) => {
   await new CityModel(req.body).save();
   res.send('OK');
   console.log(seeAllInDb(CityModel));
+});
+
+const countVillainsByCities = R.pipe(
+  R.map(R.prop('pos_')),
+  R.countBy(R.identity),
+  R.toPairs,
+  R.sortBy(R.descend(R.prop(1))),
+);
+
+app.get('/getListCitiesVillains', async (req, res) => {
+  res.send(await countVillainsByCities(await VillainModel.find({}).exec())
+  );
 });
 
 /* --- Mount --- */
