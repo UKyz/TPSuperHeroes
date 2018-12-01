@@ -4,7 +4,11 @@ const express = require('express');
 
 const bodyParser = require('body-parser');
 
+const rp = require('request-promise');
+
 const R = require('ramda');
+
+const moment = require('moment');
 
 const app = express();
 app.use(bodyParser.json());
@@ -35,6 +39,9 @@ app.get('/getListAvailableHeroes', async (req, res) => {
 
 /* --- Villain --- */
 
+let updateVillain = moment().format();
+console.log(updateVillain);
+
 const villainSchema = require('./models/villain').schema;
 
 const VillainModel = mongoose.model('villainModel', villainSchema);
@@ -42,10 +49,11 @@ const VillainModel = mongoose.model('villainModel', villainSchema);
 app.post('/newVillain', async (req, res) => {
   await new VillainModel(req.body).save();
   res.send('OK');
-  console.log(seeAllInDb(VillainModel));
+  console.log(await seeAllInDb(VillainModel));
 });
 
 app.get('/getListVillains', async (req, res) => {
+  hookVillain(10);
   res.send(await VillainModel.find((err, villains) => {
     if (err) {
       return console.error(err);
@@ -53,6 +61,30 @@ app.get('/getListVillains', async (req, res) => {
     return villains;
   }));
 });
+
+const newVillain = name => {
+  console.log('Test');
+  rp({method: 'POST', uri: `${process.env.API_SLS}/newVillain`,
+    body: {name: `${name}`}, json: true})
+    .then(villain => {
+      new VillainModel(villain).save();
+    });
+};
+
+const hookVillain = unitTime => {
+  const duration =
+    moment.duration(moment(updateVillain).diff(moment()));
+  const nbSeconds = (-duration.seconds());
+  if (nbSeconds > unitTime) {
+    let timeFactor = Math.trunc(nbSeconds / unitTime);
+    const timeLess = nbSeconds - (unitTime * timeFactor);
+    updateVillain = moment().subtract(timeLess, 'seconds');
+    while (timeFactor > 0) {
+      newVillain('Test');
+      timeFactor -= 1;
+    }
+  }
+};
 
 /* --- City --- */
 

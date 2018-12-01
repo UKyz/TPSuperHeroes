@@ -24,10 +24,10 @@ const getListAvailableHeroes = () => {
 
 const getListMovesHeroes = async listCities => {
   console.log(`list Cities : ${listCities}`);
-  // Fonction d'opti
   // Choppe les héros available
   const listAvailableHeroes = await getListAvailableHeroes();
   console.log(`list Heroes: ${listAvailableHeroes}`);
+  // Fonction d'opti
   /* -- listAvailableHeroes.forEach(hero => {
     console.log(hero);
     // Récupère les coordonnées de hero.position

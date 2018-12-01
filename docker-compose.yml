@@ -11,7 +11,7 @@ services:
     networks:
     - tpsuperheroes
 
-  api:
+  manage-db:
     build: ./db
     ports:
     - "3010:3010"
@@ -21,7 +21,7 @@ services:
     - DB=mongodb://db:27017/db
     - PORT=3010
     - API_CONFEDERATION=http://confederation:3020
-    - API_SLS=http://sls:3050
+    - API_SLS=http://sls:3000
     networks:
     - tpsuperheroes
 
@@ -32,7 +32,7 @@ services:
     environment:
     - PORT=3020
     - API_DB=http://api:3010
-    - API_SLS=http://sls:3050
+    - API_SLS=http://sls:3000
     networks:
     - tpsuperheroes
 
