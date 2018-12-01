@@ -6,8 +6,11 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "moment": "^2.22.2",
     "mongoose": "^5.3.11",
-    "ramda": "^0.26.0"
+    "ramda": "^0.26.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
   },
   "scripts": {
     "start": "node server.js"
