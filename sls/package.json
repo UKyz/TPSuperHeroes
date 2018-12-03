@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "serverless offline start --host 0.0.0.0"
+    "start": "serverless offline start --host 0.0.0.0 --skipCacheInvalidation"
   },
   "dependencies": {
+    "mongoose": "^5.3.14",
     "serverless": "^1.32.0",
     "serverless-offline": "^3.31.2"
   }
