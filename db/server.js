@@ -4,12 +4,6 @@ const express = require('express');
 
 const bodyParser = require('body-parser');
 
-const rp = require('request-promise');
-
-const R = require('ramda');
-
-const moment = require('moment');
-
 const app = express();
 app.use(bodyParser.json());
 app.listen(process.env.PORT);
@@ -39,7 +33,7 @@ app.get('/getListAvailableHeroes', async (req, res) => {
 
 /* --- Villain --- */
 
-let updateVillain = moment().format();
+/* let updateVillain = moment().format();
 console.log(updateVillain);
 
 const villainSchema = require('./models/villain').schema;
@@ -84,7 +78,7 @@ const hookVillain = unitTime => {
       timeFactor -= 1;
     }
   }
-};
+}; */
 
 /* --- City --- */
 
@@ -98,7 +92,7 @@ app.post('/newCity', async (req, res) => {
   console.log(seeAllInDb(CityModel));
 });
 
-const countVillainsByCities = R.pipe(
+/* -- const countVillainsByCities = R.pipe(
   R.map(R.prop('pos_')),
   R.countBy(R.identity),
   R.toPairs,
@@ -108,7 +102,7 @@ const countVillainsByCities = R.pipe(
 app.get('/getListCitiesVillains', async (req, res) => {
   res.send(await countVillainsByCities(await VillainModel.find({}).exec())
   );
-});
+}); */
 
 /* --- Mount --- */
 

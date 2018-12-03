@@ -4,7 +4,10 @@ services:
     build: ./sls
     ports:
     - "3050:3000"
+    links:
+    - db
     environment:
+    - DB=mongodb://db:27017/db
     - PORT=3050
     - API_DB=http://api:3010
     - API_CONFEDERATION=http://confederation:3020
