@@ -1,0 +1,24 @@
+service: sls-villain
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  newVillain:
+    handler: src/new-villain.addVillainHandler
+    events:
+      - http: POST /newVillain
+
+  getVillains:
+    handler: src/get-villains.getVillainsHandler
+    events:
+      - http: GET /getVillains
+
+  countVillainsByCitiesHandler:
+    handler: src/count-villains-by-cities.countVillainsByCitiesHandler
+    events:
+      - http: POST /countVillainsByCities
+
+plugins:
+- serverless-offline

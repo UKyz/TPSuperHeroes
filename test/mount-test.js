@@ -1,4 +1,4 @@
-const chai = require('chai');
+/* --const chai = require('chai');
 
 const {Mount} = require('../sls/classes/mount.js');
 
@@ -23,5 +23,5 @@ describe('mount.js', () => {
     mount.endurance -= 10;
     mount.endurance.should.be.equal(90);
   });
-});
+}); */
 

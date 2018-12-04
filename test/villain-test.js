@@ -1,10 +1,10 @@
 const chai = require('chai');
 
-const {Villain} = require('../sls/classes/villain.js');
+const {Villain} = require('../sls-villain/class/villain.js');
 
 chai.should();
 
-describe('villain.js', () => {
+describe('new-hero.js', () => {
   const v1 = new Villain('Maxime');
 
   it('should create a villain', () => {

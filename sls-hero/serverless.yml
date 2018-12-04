@@ -1,0 +1,19 @@
+service: sls-hero
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  newHero:
+    handler: src/new-hero.addHeroHandler
+    events:
+      - http: POST /newHero
+
+  getHeroes:
+    handler: src/get-heroes.getHeroesAvailableHandler
+    events:
+      - http: GET /getHeroes
+
+plugins:
+- serverless-offline
