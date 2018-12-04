@@ -1,0 +1,15 @@
+{
+  "name": "sls-villain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "serverless offline start --host 0.0.0.0 --skipCacheInvalidation"
+  },
+  "dependencies": {
+    "mongoose": "^5.3.14",
+    "ramda": "^0.26.1",
+    "serverless": "^1.34.1",
+    "serverless-offline": "^3.31.3"
+  }
+}

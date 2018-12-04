@@ -1,4 +1,4 @@
-const chai = require('chai');
+/* -- const chai = require('chai');
 
 const {City} = require('../sls/classes/city.js');
 
@@ -17,5 +17,5 @@ describe('city.js', () => {
     city1.localization.longitude.should.be.equal(-3);
     city1.localization.latitude.should.be.equal(48);
   });
-});
+}); */
 

@@ -1,30 +1,28 @@
 version: '3'
 services:
-  sls:
-    build: ./sls
+  sls-villain:
+    build: ./sls-villain
     ports:
-    - "3050:3000"
+    - "3060:3000"
     links:
     - db
     environment:
     - DB=mongodb://db:27017/db
-    - PORT=3050
-    - API_DB=http://api:3010
+    - PORT=3060
     - API_CONFEDERATION=http://confederation:3020
     networks:
     - tpsuperheroes
 
-  manage-db:
-    build: ./db
+  sls-hero:
+    build: ./sls-hero
     ports:
-    - "3010:3010"
+    - "3070:3000"
     links:
     - db
     environment:
     - DB=mongodb://db:27017/db
-    - PORT=3010
+    - PORT=3060
     - API_CONFEDERATION=http://confederation:3020
-    - API_SLS=http://sls:3000
     networks:
     - tpsuperheroes
 
@@ -34,7 +32,6 @@ services:
     - "3020:3020"
     environment:
     - PORT=3020
-    - API_DB=http://api:3010
     - API_SLS=http://sls:3000
     networks:
     - tpsuperheroes
