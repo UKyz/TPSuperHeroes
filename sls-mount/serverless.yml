@@ -1,0 +1,19 @@
+service: sls-mount
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  newMount:
+    handler: src/new-mount.addMountHandler
+    events:
+      - http: POST /newMount
+
+  getMountes:
+    handler: src/get-mounts.getMountsAvailableHandler
+    events:
+      - http: GET /getMounts
+
+plugins:
+- serverless-offline
