@@ -1,21 +1,14 @@
 const mongoose = require('mongoose');
 
-/* -- const hookVillain = unitTime => {
-  const duration =
-    moment.duration(moment(updateVillain).diff(moment()));
-  const nbSeconds = (-duration.seconds());
-  if (nbSeconds > unitTime) {
-    let timeFactor = Math.trunc(nbSeconds / unitTime);
-    const timeLess = nbSeconds - (unitTime * timeFactor);
-    updateVillain = moment().subtract(timeLess, 'seconds');
-    while (timeFactor > 0) {
-      newVillain('Test');
-      timeFactor -= 1;
-    }
-  }
-}; */
+const rp = require('request-promise');
 
-const getVillains = () => {
+const hookVillain = () => {
+  rp({method: 'POST', uri: 'http://localhost:3000/hookVillain',
+    json: true, body: {unitTime: 10}}).then(res => console.log(res));
+};
+
+const getVillains = async () => {
+  await hookVillain();
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const villainSchema = require('../model/villain').schema;
   const VillainModel = mongoose.model('villainModel', villainSchema);
