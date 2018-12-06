@@ -12,14 +12,18 @@ app.get('/test', async (req, res) => {
   res.status(200).send('OK');
 });
 
-const getListCities = () => {
-  return rp({uri: `${process.env.API_DB}/getListCitiesVillains`,
+const getListCities = async () => {
+  const listVillains = await rp({uri: `${process.env.SLS_VILLAIN}/getVillains`,
     json: true});
+  console.log(`listVillains : ${listVillains}`);
+  return rp({method: 'POST', uri:
+      `${process.env.SLS_VILLAIN}/countVillainsByCities`, json: true, body:
+      listVillains});
 };
 
 const getListAvailableHeroes = () => {
   return rp(
-    {method: 'GET', uri: `${process.env.API_DB}/getListAvailableHeroes`});
+    {method: 'GET', uri: `${process.env.SLS_HERO}/getHeroes`});
 };
 
 const getListMovesHeroes = async listCities => {
