@@ -4,7 +4,7 @@ const {Hero} = require('../sls-hero/class/hero.js');
 
 chai.should();
 
-describe('hero.js', () => {
+describe('city.js', () => {
   const h1 = new Hero('Robin');
 
   it('should create a hero', () => {
