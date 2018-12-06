@@ -6,6 +6,6 @@ COPY package.json .
 
 RUN yarn
 
-COPY sls-mount .
+COPY . .
 
 CMD ["yarn", "start"]
