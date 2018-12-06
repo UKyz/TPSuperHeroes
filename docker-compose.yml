@@ -45,7 +45,8 @@ services:
     - "3020:3020"
     environment:
     - PORT=3020
-    - API_SLS=http://sls:3000
+    - SLS_VILLAIN=http://sls-villain:3000
+    - SLS_HERO=http://sls-hero:3000
     networks:
     - tpsuperheroes
 
