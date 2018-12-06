@@ -4,7 +4,7 @@ const {Villain} = require('../sls-villain/class/villain.js');
 
 chai.should();
 
-describe('new-hero.js', () => {
+describe('new-city.js', () => {
   const v1 = new Villain('Maxime');
 
   it('should create a villain', () => {

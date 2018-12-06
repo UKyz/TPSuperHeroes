@@ -1,0 +1,19 @@
+service: sls-city
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  newCity:
+    handler: src/new-city.addCityHandler
+    events:
+      - http: POST /newCity
+
+  getCities:
+    handler: src/get-cities.getCitiesHandler
+    events:
+      - http: GET /getCities
+
+plugins:
+- serverless-offline

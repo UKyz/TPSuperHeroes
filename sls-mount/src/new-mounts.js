@@ -1,3 +1,4 @@
+/* eslint-disable-next-line import/no-unresolved */
 const mongoose = require('mongoose');
 
 const {Mount} = require('../class/mount.js');
