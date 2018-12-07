@@ -1,5 +1,18 @@
 version: '3'
 services:
+  sls-path-optimiser:
+    build: ./sls-path-optimiser
+    ports:
+      - "3050:3000"
+    links:
+      - db
+    environment:
+      - DB=mongodb://db:27017/db
+      - PORT=3050
+      - API_CONFEDERATION=http://confederation:3020
+    networks:
+      - tpsuperheroes
+
   sls-villain:
     build: ./sls-villain
     ports:
