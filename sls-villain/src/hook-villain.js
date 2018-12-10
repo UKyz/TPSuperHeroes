@@ -52,12 +52,6 @@ const hookVillain = async unitTime => {
   return 'OK';
 };
 
-/* eslint-disable-next-line require-await */
-const hookVillainHandler = async msg => ({
-  status: 200,
-  body: JSON.stringify(await hookVillain(JSON.parse(msg.body).unitTime))
-});
-
 module.exports = {
-  hookVillainHandler
+  hookVillain
 };
