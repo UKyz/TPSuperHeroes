@@ -31,6 +31,11 @@ const installCities = () => {
     {method: 'POST', uri: `${process.env.SLS_CITY}/installCities`});
 };
 
+const installHero = () => {
+  return rp(
+    {method: 'POST', uri: `${process.env.SLS_HERO}/installHero`});
+};
+
 const getListMovesHeroes = async listCities => {
   console.log(`list Cities : ${listCities}`);
   // Choppe les héros available
@@ -65,6 +70,7 @@ const main = () => {
 setTimeout(() => {
   console.log('Let\'s go !');
   installCities();
+  installHero();
   main();
 }, 15000);
 
