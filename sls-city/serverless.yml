@@ -15,5 +15,10 @@ functions:
     events:
       - http: GET /getCities
 
+  installCities:
+    handler: src/install-cities.installCitiesHandler
+    events:
+    - http: POST /installCities
+
 plugins:
 - serverless-offline
