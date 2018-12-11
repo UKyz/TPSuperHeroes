@@ -15,10 +15,10 @@ app.get('/test', async (req, res) => {
 const getListCities = async () => {
   const listVillains = await rp({uri: `${process.env.SLS_VILLAIN}/getVillains`,
     json: true});
-  console.log(`listVillains : ${listVillains}`);
+  // Console.log(`listVillains : ${listVillains}`);
   return rp({method: 'POST', uri:
       `${process.env.SLS_VILLAIN}/countVillainsByCities`, json: true, body:
-      listVillains});
+    listVillains});
 };
 
 const getListAvailableHeroes = () => {
@@ -33,23 +33,33 @@ const getListMovesHeroes = async listCities => {
   console.log(`list Heroes: ${listAvailableHeroes}`);
   // Fonction d'opti
   /* -- listAvailableHeroes.forEach(hero => {
-    console.log(hero);
-    // Récupère les coordonnées de hero.position
-    // Calculer la distance en km entre les deux positions
-  }); */
+   console.log(hero);
+   // Récupère les coordonnées de hero.position
+   // Calculer la distance en km entre les deux positions
+   }); */
 };
 
-/* --setInterval(() => {
-  const listCityVillain = getListCities();
-  listCityVillain.forEach(city => {
-    console.log(city);
-    // Récuperer les coordonnées de la city
-    const listMovesHeroes = getListMovesHeroes();
-    listMovesHeroes.forEach(elm => {
-      console.log(elm);
-      // Créer un timeout pour dire qu'il est arrivé grace à elm.timeMove
-    });
-  });
-}, 20000); */
+const main = () => {
+  setInterval(async () => {
+    const listCityVillain = await getListCities();
+    console.log('Test ici : ');
+    console.log(listCityVillain);
+    // Const listMovesHeroes = getListMovesHeroes();
+    /* listCityVillain.forEach(city => {
+      console.log(city);
+      // Récuperer les coordonnées de la city
+      const listMovesHeroes = getListMovesHeroes();
+      listMovesHeroes.forEach(elm => {
+        console.log(elm);
+        // Créer un timeout pour dire qu'il est arrivé grace à elm.timeMove
+      });
+    }); */
+  }, 10000);
+};
+
+setTimeout(() => {
+  console.log('Let\'s go !');
+  main();
+}, 15000);
 
 app.listen(process.env.PORT);
