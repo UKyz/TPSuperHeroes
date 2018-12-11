@@ -15,5 +15,10 @@ functions:
     events:
       - http: GET /getHeroes
 
+  intallHero:
+    handler: src/install-hero.installHeroHandler
+    events:
+      - http: POST /installHero
+
 plugins:
 - serverless-offline

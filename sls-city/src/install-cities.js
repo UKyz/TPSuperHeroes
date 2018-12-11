@@ -28,10 +28,6 @@ const getCities = async () => {
   const citySchema = require('../model/city').schema;
   const CityModel = mongoose.model('cityModel', citySchema);
   const listCities = await CityModel.find({}).exec();
-  /* If (listCities.length === 0) {
-    return false;
-  }
-  return true; */
   return (listCities.length !== 0);
 };
 
