@@ -28,10 +28,11 @@ const getCities = async () => {
   const citySchema = require('../model/city').schema;
   const CityModel = mongoose.model('cityModel', citySchema);
   const listCities = await CityModel.find({}).exec();
-  if (listCities.length === 0) {
+  /* If (listCities.length === 0) {
     return false;
   }
-  return true;
+  return true; */
+  return (listCities.length !== 0);
 };
 
 const checkCities = async () => {
@@ -41,7 +42,6 @@ const checkCities = async () => {
   return 'OK';
 };
 
-/* eslint-disable-next-line require-await */
 const installCitiesHandler = async () => ({
   status: 200,
   body: JSON.stringify(await checkCities())
