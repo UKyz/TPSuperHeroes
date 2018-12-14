@@ -20,5 +20,10 @@ functions:
     events:
     - http: POST /installCities
 
+  getCitiesPos:
+    handler: src/get-cities-pos.getCitiesPosHandler
+    events:
+    - http: POST /getCitiesPos
+
 plugins:
 - serverless-offline
