@@ -15,10 +15,28 @@ app.get('/test', async (req, res) => {
 const getListCities = async () => {
   const listVillains = await rp({uri: `${process.env.SLS_VILLAIN}/getVillains`,
     json: true});
-  // Console.log(`listVillains : ${listVillains}`);
-  return rp({method: 'POST', uri:
+  const villainsByCities = await rp({method: 'POST', uri:
       `${process.env.SLS_VILLAIN}/countVillainsByCities`, json: true, body:
     listVillains});
+
+  const citiesWithVillains = [];
+  villainsByCities.forEach(element => {
+    citiesWithVillains.push({name: element.name});
+  });
+  const citiesPos = await rp({method: 'POST', uri:
+      `${process.env.SLS_CITY}/getCitiesPos`, json: true, body:
+    citiesWithVillains});
+
+  villainsByCities.forEach(villain => {
+    citiesPos.forEach(city => {
+      if (villain.name === city.name) {
+        villain.pos = {x: city.latitude, y: city.longitude};
+      }
+    });
+  });
+  console.log(villainsByCities);
+
+  return villainsByCities;
 };
 
 const getListAvailableHeroes = () => {
