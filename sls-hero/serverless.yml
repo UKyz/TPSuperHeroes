@@ -20,5 +20,20 @@ functions:
     events:
       - http: POST /installHero
 
+  addToDoList:
+    handler: src/add-to-do-list.addTicketHandler
+    events:
+      - http: POST /addTicket
+
+  getToDoList:
+    handler: src/get-to-do-list.getTicketsHandler
+    events:
+      - http: POST /getTickets
+
+  hookHero:
+    handler: src/hook-hero.hookHeroHandler
+    events:
+      - http: POST /hookHero
+
 plugins:
 - serverless-offline

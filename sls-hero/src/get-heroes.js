@@ -13,7 +13,6 @@ const getHeroes = () => {
     });
 };
 
-/* eslint-disable-next-line require-await */
 const getHeroesAvailableHandler = async () => ({
   status: 200,
   body: JSON.stringify(await getHeroes())
