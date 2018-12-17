@@ -1,4 +1,3 @@
-/* eslint-disable-next-line import/no-unresolved */
 const mongoose = require('mongoose');
 
 const moment = require('moment');
@@ -13,7 +12,8 @@ const newVillain = name => {
 const getLastUpdate = () => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const lastUpdateSchema = require('../model/last-update').schema;
-  const LastUpdateModel = mongoose.model('lastUpdateModel', lastUpdateSchema);
+  const LastUpdateModel = mongoose.model('lastUpdateVillainModel',
+    lastUpdateSchema);
   return LastUpdateModel.find((err, lastUpdate) => {
     if (err) {
       return console.error(err);
@@ -46,7 +46,8 @@ const hookVillain = async unitTime => {
   const updateVillain = computeNewUpdate(await getLastUpdate(), unitTime);
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const lastUpdateSchema = require('../model/last-update').schema;
-  const LastUpdateModel = mongoose.model('lastUpdateModel', lastUpdateSchema);
+  const LastUpdateModel = mongoose.model('lastUpdateVillainModel',
+    lastUpdateSchema);
   await LastUpdateModel.deleteMany({});
   await new LastUpdateModel({date_: moment(updateVillain).format().toString()})
     .save();

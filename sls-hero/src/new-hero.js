@@ -1,4 +1,3 @@
-/* eslint-disable-next-line import/no-unresolved */
 const mongoose = require('mongoose');
 
 const {Hero} = require('../class/hero.js');
@@ -11,7 +10,6 @@ const addHero = async name => {
   return 'OK';
 };
 
-/* eslint-disable-next-line require-await */
 const addHeroHandler = async msg => ({
   status: 200,
   body: JSON.stringify(await addHero(JSON.parse(msg.body).name))

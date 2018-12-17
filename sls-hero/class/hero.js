@@ -4,6 +4,7 @@ class Hero {
     this.speed_ = 0;
     this.pos_ = 'Paris';
     this.score_ = 0;
+    this.moving_ = false;
   }
 
   get name() {

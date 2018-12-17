@@ -25,5 +25,10 @@ functions:
     events:
       - http: POST /countVillainsByCities
 
+  deleteVillainsInCity:
+    handler: src/delete-villains-in-city.deleteVillainsHandler
+    events:
+      - http: POST /deleteVillainsInCity
+
 plugins:
 - serverless-offline

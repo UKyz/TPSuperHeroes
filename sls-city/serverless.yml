@@ -10,6 +10,11 @@ functions:
     events:
     - http: POST /newCity
 
+  getCity:
+    handler: src/get-city.getCityHandler
+    events:
+      - http: POST /getCity
+
   getCities:
     handler: src/get-cities.getCitiesHandler
     events:

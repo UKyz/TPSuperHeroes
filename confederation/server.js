@@ -73,7 +73,7 @@ const main = () => {
     console.log('Test ici : ');
     console.log(listCityVillain);
     // Const listMovesHeroes = getListMovesHeroes();
-    /* listCityVillain.forEach(city => {
+  /* listCityVillain.forEach(city => {
       console.log(city);
       // Récuperer les coordonnées de la city
       const listMovesHeroes = getListMovesHeroes();
@@ -85,11 +85,11 @@ const main = () => {
   }, 10000);
 };
 
-setTimeout(() => {
+setTimeout(async () => {
   console.log('Let\'s go !');
-  installCities();
-  installHero();
+  console.log(`Installation cities : ${await installCities()}`);
+  console.log(`Installation hero : ${await installHero()}`);
   main();
-}, 15000);
+}, 20000);
 
 app.listen(process.env.PORT);
