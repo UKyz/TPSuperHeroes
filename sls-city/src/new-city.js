@@ -10,7 +10,6 @@ const addCity = async (name, lat, long) => {
   return 'OK';
 };
 
-/* eslint-disable-next-line require-await */
 const addCityHandler = async msg => ({
   status: 200,
   body: JSON.stringify(await addCity(JSON.parse(msg.body).name,

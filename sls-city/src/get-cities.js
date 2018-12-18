@@ -13,7 +13,6 @@ const getCities = () => {
     });
 };
 
-/* eslint-disable-next-line require-await */
 const getCitiesHandler = async () => ({
   status: 200,
   body: JSON.stringify(await getCities())

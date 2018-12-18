@@ -1,25 +1,20 @@
 const R = require('ramda');
 
-const countVillainsInCities = R.pipe(
+const calcWeight = R.curry((list, p) => {
+  return {name: p[0], score: p[1]};
+});
+const mapCities = list => R.map(calcWeight(list), list);
+
+const countVillainsByCities = R.pipe(
   R.map(R.prop('pos_')),
   R.countBy(R.identity),
   R.toPairs,
-  R.sortBy(R.descend(R.prop(1))),
+  mapCities,
 );
 
-const countVillainsByCities = list => {
-  list = countVillainsInCities(list);
-  const count = [];
-  list.forEach(element => {
-    count.push({name: element[0], score: element[1]});
-  });
-  return count;
-};
-
-/* eslint-disable-next-line require-await */
 const countVillainsByCitiesHandler = async msg => ({
   status: 200,
-  body: JSON.stringify(countVillainsByCities(JSON.parse(msg.body)))
+  body: JSON.stringify(await countVillainsByCities(JSON.parse(msg.body)))
 });
 
 module.exports = {

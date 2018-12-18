@@ -1,4 +1,3 @@
-/* eslint-disable-next-line import/no-unresolved */
 const mongoose = require('mongoose');
 
 const getMounts = () => {
@@ -14,7 +13,6 @@ const getMounts = () => {
     });
 };
 
-/* eslint-disable-next-line require-await */
 const getMountsAvailableHandler = async () => ({
   status: 200,
   body: JSON.stringify(await getMounts())

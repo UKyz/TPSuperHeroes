@@ -4,10 +4,13 @@ const rp = require('request-promise');
 
 const bodyParser = require('body-parser');
 
+const R = require('ramda');
+
 const app = express();
 app.use(bodyParser.json());
 
 app.get('/test', async (req, res) => {
+  console.log('->>>>> Test');
   await getListMovesHeroes(await getListCities());
   res.status(200).send('OK');
 });
@@ -19,13 +22,10 @@ const getListCities = async () => {
       `${process.env.SLS_VILLAIN}/countVillainsByCities`, json: true, body:
     listVillains});
 
-  const citiesWithVillains = [];
-  villainsByCities.forEach(element => {
-    citiesWithVillains.push({name: element.name});
-  });
+  const keepName = R.pipe(R.map(R.prop('name')));
   const citiesPos = await rp({method: 'POST', uri:
       `${process.env.SLS_CITY}/getCitiesPos`, json: true, body:
-    citiesWithVillains});
+    await keepName(villainsByCities)});
 
   villainsByCities.forEach(villain => {
     citiesPos.forEach(city => {
@@ -34,8 +34,6 @@ const getListCities = async () => {
       }
     });
   });
-  console.log(villainsByCities);
-
   return villainsByCities;
 };
 

@@ -1,4 +1,3 @@
-/* eslint-disable-next-line import/no-unresolved */
 const mongoose = require('mongoose');
 
 const {Mount} = require('../class/mount.js');
@@ -11,7 +10,6 @@ const addMount = async name => {
   return 'OK';
 };
 
-/* eslint-disable-next-line require-await */
 const addMountHandler = async msg => ({
   status: 200,
   body: JSON.stringify(await addMount(JSON.parse(msg.body).name))

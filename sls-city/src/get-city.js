@@ -7,7 +7,6 @@ const getCity = idCity => {
   return CityModel.findById(idCity).exec();
 };
 
-/* eslint-disable-next-line require-await */
 const getCityHandler = async msg => ({
   status: 200,
   body: JSON.stringify(await getCity(JSON.parse(msg.body).idCity))
