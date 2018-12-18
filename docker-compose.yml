@@ -23,6 +23,7 @@ services:
     - DB=mongodb://db:27017/db
     - PORT=3060
     - API_CONFEDERATION=http://confederation:3020
+    - SLS_CITY=http://sls-city:3000
     networks:
     - tpsuperheroes
 

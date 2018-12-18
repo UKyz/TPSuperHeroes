@@ -1,8 +1,8 @@
 class Villain {
-  constructor(name) {
+  constructor(name, city) {
     this.name_ = name || 'UNKHERO';
     this.speed_ = 0;
-    this.pos_ = 'Paris';
+    this.pos_ = city || 'Paris';
     this.score_ = 0;
   }
 
