@@ -8,7 +8,7 @@ const getCitiesPos = async tab => {
   const listCitiesPos = [];
   tab.forEach(element => {
     listCities.forEach(city => {
-      if (element.name === city.name_) {
+      if (element === city.name_) {
         listCitiesPos.push({
           name: city.name_,
           latitude: city.latitude_,
@@ -20,7 +20,6 @@ const getCitiesPos = async tab => {
   return listCitiesPos;
 };
 
-/* eslint-disable-next-line require-await */
 const getCitiesPosHandler = async msg => ({
   status: 200,
   body: JSON.stringify(await getCitiesPos(JSON.parse(msg.body)))

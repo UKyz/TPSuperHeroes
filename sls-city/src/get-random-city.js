@@ -9,7 +9,6 @@ const getRandomCity = async () => {
   return listCities[random].name_;
 };
 
-/* eslint-disable-next-line require-await */
 const getRandomCityHandler = async () => ({
   status: 200,
   body: JSON.stringify(await getRandomCity())

@@ -13,7 +13,6 @@ const getTickets = idHero => {
     }).sort({dateCreation_: 1});
 };
 
-/* eslint-disable-next-line require-await */
 const getTicketsHandler = async msg => ({
   status: 200,
   body: JSON.stringify(await getTickets(JSON.parse(msg.body).idHero_))

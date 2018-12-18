@@ -10,7 +10,6 @@ const addVillain = async name => {
   return 'OK';
 };
 
-/* eslint-disable-next-line require-await */
 const addVillainHandler = async msg => ({
   status: 200,
   body: JSON.stringify(await addVillain(JSON.parse(msg.body).name))
