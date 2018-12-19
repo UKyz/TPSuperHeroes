@@ -143,3 +143,6 @@ typings/
 .next
 
 yarn.lock
+
+/ember-map/package-lock.json
+/ember-map/yarn.lock
