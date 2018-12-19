@@ -4,7 +4,7 @@ const getHeroes = () => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const heroSchema = require('../model/hero').schema;
   const HeroModel = mongoose.model('heroModel', heroSchema);
-  return HeroModel.find({pos_: {$not: /move/i}},
+  return HeroModel.find({moving_: false},
     (err, heroes) => {
       if (err) {
         return console.error(err);

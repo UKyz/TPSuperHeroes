@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.3",
+    "moment": "^2.23.0",
     "promise-each": "^2.2.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
