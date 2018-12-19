@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-const moment = require('moment');
-
 const addTicket = async ticket => {
+  console.log('addTicket : ');
+  console.log(ticket);
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const toDoListSchema = require('../model/to-do-list').schema;
   const ToDoListModel = mongoose.model('toDoListModel', toDoListSchema);
-  ticket.dateCreation_ = moment().format();
   await new ToDoListModel(ticket).save();
   return 'OK';
 };
