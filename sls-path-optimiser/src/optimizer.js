@@ -36,7 +36,8 @@ const optimizePath = (cities, mounts, hero) => {
         const mountsByNow = R.difference(mounts, solution.mountsUsed);
         const mountsOnCityA = R.filter(x => R.equals(x.pos, cityA.name),
           mountsByNow);
-        solution.distanceTraveled.push(cityA.name);
+        solution.distanceTraveled.push(
+          {id: cityA.id, name: cityA.name, duration: distanceCounter});
         if (mountsOnCityA.length > 0) { // If there are mounts available
           distanceCounter += distance(cityA, cityB) / 4;
           solution.mountsUsed.push(R.head(mountsOnCityA));
@@ -116,7 +117,11 @@ const optimizePath = (cities, mounts, hero) => {
       break;
     }
   }
-  return R.head(parents);
+  return R.pipe(
+    R.head,
+    R.dissoc('path'),
+    R.assoc('idHero', hero.id)
+  )(parents);
 };
 
 const optimizerHandler = async msg => ({
