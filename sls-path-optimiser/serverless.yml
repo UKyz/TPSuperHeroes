@@ -10,7 +10,7 @@ provider:
 
 functions:
   optimisePath:
-    handler: src/optimizer.optimizePath
+    handler: src/optimizer.optimizerHandler
     events:
       - http: POST /optimisePath
 

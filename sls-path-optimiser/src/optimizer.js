@@ -119,4 +119,10 @@ const optimizePath = (cities, mounts, hero) => {
   return R.head(parents);
 };
 
-module.exports = {optimizePath};
+const optimizerHandler = async msg => ({
+  status: 200,
+  body: JSON.stringify(await optimizePath(JSON.parse(msg.body).cities,
+    JSON.parse(msg.body).mounts, JSON.parse(msg.body).hero))
+});
+
+module.exports = {optimizerHandler};
