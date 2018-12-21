@@ -96,7 +96,7 @@ const main = () => {
     if (listAvailableHeroes.length > 0 && listCityVillain.length > 0) {
       await manageMovesHeroes(listCityVillain, listAvailableHeroes);
     }
-  }, 10000);
+  }, 30000);
 };
 
 setTimeout(async () => {
