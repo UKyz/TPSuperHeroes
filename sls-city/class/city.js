@@ -1,20 +1,12 @@
 class City {
   constructor(name, lat, long) {
     this.name_ = name || 'UNKCITY';
-    this.latitude_ = lat;
-    this.longitude_ = long;
+    this.latitude_ = lat || 0;
+    this.longitude_ = long || 0;
   }
 
   get name() {
     return this.name_;
-  }
-
-  get latitude() {
-    return this.latitude_;
-  }
-
-  get longitude() {
-    return this.longitude_;
   }
 }
 
