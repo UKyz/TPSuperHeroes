@@ -13,8 +13,7 @@ const addVillain = async name => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const villainSchema = require('../model/villain').schema;
   const VillainModel = mongoose.model('villainModel', villainSchema);
-  await new VillainModel(new NewVillain(name, await getRandomCity())).save();
-  return 'OK';
+  return new VillainModel(new NewVillain(name, await getRandomCity())).save();
 };
 
 const addVillainHandler = async msg => ({

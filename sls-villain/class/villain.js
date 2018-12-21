@@ -21,18 +21,6 @@ class Villain {
   get score() {
     return this.score_;
   }
-
-  changePosition(position) {
-    this.pos_ = position;
-  }
-
-  noPainNoGain(gain) {
-    this.score_ += gain;
-  }
-
-  setSpeed(speed) {
-    this.speed_ = speed;
-  }
 }
 
 module.exports = {Villain};

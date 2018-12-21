@@ -4,15 +4,9 @@ const deleteVillain = async city => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const villainSchema = require('../model/villain').schema;
   const VillainModel = mongoose.model('villainModel', villainSchema);
-  console.log(city);
-  let nbDelete = 0;
-  await VillainModel.deleteMany({pos_: city}, (err, res) => {
-    if (err) {
-      return console.error(err);
-    }
-    nbDelete = res.n;
-  });
-  return {nbVillainsDeleted: nbDelete};
+  const nbDelete = await VillainModel.deleteMany({pos_: city}).exec();
+  console.log(`${nbDelete.n} villains had been killed in ${city}`);
+  return {nbVillainsDeleted: nbDelete.n};
 };
 
 const deleteVillainsHandler = async msg => ({

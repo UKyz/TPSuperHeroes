@@ -7,12 +7,7 @@ const getVillains = async () => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const villainSchema = require('../model/villain').schema;
   const VillainModel = mongoose.model('villainModel', villainSchema);
-  return VillainModel.find((err, villains) => {
-    if (err) {
-      return console.error(err);
-    }
-    return villains;
-  });
+  return VillainModel.find({}).exec();
 };
 
 const getVillainsHandler = async () => ({

@@ -1,19 +1,6 @@
-const express = require('express');
-
 const rp = require('request-promise');
 
-const bodyParser = require('body-parser');
-
 const moment = require('moment');
-
-const app = express();
-app.use(bodyParser.json());
-
-app.get('/test', async (req, res) => {
-  console.log('->>>>> Test');
-  await getListCities();
-  res.status(200).send('OK');
-});
 
 const getListCities = async () => {
   const listVillains = await rp({uri: `${process.env.SLS_VILLAIN}/getVillains`,
@@ -53,21 +40,16 @@ const getListAvailableHeroes = () => {
 };
 
 const installCities = () => {
-  return rp(
-    {method: 'POST', uri: `${process.env.SLS_CITY}/installCities`});
+  return rp({method: 'POST', uri: `${process.env.SLS_CITY}/installCities`});
 };
 
 const installHero = () => {
-  return rp(
-    {method: 'POST', uri: `${process.env.SLS_HERO}/installHero`});
+  return rp({method: 'POST', uri: `${process.env.SLS_HERO}/installHero`});
 };
 
 const manageMovesHeroes = async (listCities, listHeroes) => {
   let now = moment();
-  const optimisePath = await getOptimisePath(listCities,
-    listHeroes[0], []);
-  console.log('optimise res :');
-  console.log(optimisePath);
+  const optimisePath = await getOptimisePath(listCities, listHeroes[0], []);
   optimisePath.distanceTraveled.forEach(city => {
     now = moment(now).add(10, 'ms');
     rp({method: 'POST', uri: `${process.env.SLS_HERO}/addTicket`, json: true,
@@ -90,9 +72,6 @@ const main = () => {
   setInterval(async () => {
     const listAvailableHeroes = await getListAvailableHeroes();
     const listCityVillain = await getListCities();
-    console.log('Test ici : ');
-    console.log(listAvailableHeroes);
-    console.log(listCityVillain);
     if (listAvailableHeroes.length > 0 && listCityVillain.length > 0) {
       await manageMovesHeroes(listCityVillain, listAvailableHeroes);
     }
@@ -105,5 +84,3 @@ setTimeout(async () => {
   console.log(`Installation hero : ${await installHero()}`);
   main();
 }, 20000);
-
-app.listen(process.env.PORT);

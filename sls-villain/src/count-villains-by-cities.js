@@ -4,7 +4,6 @@ const calcWeight = R.curry((list, p) => {
   return {name: p[0], score: p[1]};
 });
 const mapCities = list => R.map(calcWeight(list), list);
-
 const countVillainsByCities = R.pipe(
   R.map(R.prop('pos_')),
   R.countBy(R.identity),
