@@ -131,19 +131,11 @@ const hookHero = async idHero => {
   const LastUpdateModel = mongoose.model('lastUpdateHeroModel',
     lastUpdateSchema);
   await LastUpdateModel.deleteMany({});
-  console.log('new save');
-  const tmp = {idHero_: idHero, date_: moment().format().toString()};
-  console.log(tmp);
-  await new LastUpdateModel(tmp).save();
-  console.log(await getLastUpdate(idHero));
+  await new LastUpdateModel({idHero_: idHero,
+    date_: moment().format().toString()}).save();
   return 'Ok';
 };
 
-const hookHeroHandler = async msg => ({
-  status: 200,
-  body: JSON.stringify(await hookHero(JSON.parse(msg.body).idHero))
-});
-
 module.exports = {
-  hookHeroHandler
+  hookHero
 };

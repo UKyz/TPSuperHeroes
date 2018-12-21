@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const R = require('ramda');
 
+const {hookHero} = require('./hook-hero');
+
 const curryHeroes = R.curry((list, p) => {
   return {id: p._id, name: p.name_, pos: p.pos_};
 });
@@ -13,7 +15,11 @@ const getHeroes = async () => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const heroSchema = require('../model/hero').schema;
   const HeroModel = mongoose.model('heroModel', heroSchema);
-  const heroes = await HeroModel.find({moving_: false}).exec();
+  let heroes = await HeroModel.find({}).exec();
+  heroes.forEach(async hero => {
+    await hookHero(hero._id);
+  });
+  heroes = await HeroModel.find({moving_: false}).exec();
   return filterPropsHeroes(heroes);
 };
 

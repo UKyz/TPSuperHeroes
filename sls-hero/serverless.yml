@@ -30,10 +30,5 @@ functions:
     events:
       - http: POST /getTickets
 
-  hookHero:
-    handler: src/hook-hero.hookHeroHandler
-    events:
-      - http: POST /hookHero
-
 plugins:
 - serverless-offline
