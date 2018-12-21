@@ -1,4 +1,6 @@
-# TPSuperHeroes [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
+# TPSuperHeroes 
+
+[![version][version-badge]][CHANGELOG] [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 ## Contents
   * [Install][Installation]
@@ -46,6 +48,7 @@ xo
   
   
   
+[CHANGELOG]: ./CHANGELOG.md
 [Alexia]: https://github.com/Alexia14
 [Me]: https://github.com/UKyz
 [Alexandre]: https://github.com/A1C0
