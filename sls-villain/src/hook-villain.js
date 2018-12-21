@@ -14,12 +14,7 @@ const getLastUpdate = () => {
   const lastUpdateSchema = require('../model/last-update').schema;
   const LastUpdateModel = mongoose.model('lastUpdateVillainModel',
     lastUpdateSchema);
-  return LastUpdateModel.find((err, lastUpdate) => {
-    if (err) {
-      return console.error(err);
-    }
-    return lastUpdate;
-  });
+  return LastUpdateModel.find({}).exec();
 };
 
 const computeNewUpdate = (lastUpdate, unitTime) => {
