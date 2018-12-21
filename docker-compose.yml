@@ -68,6 +68,19 @@ services:
     networks:
     - tpsuperheroes
 
+  ember-map:
+    build: ./ember-map
+    ports:
+      - "3100:3000"
+    links:
+      - db
+    environment:
+      - DB=mongodb://db:27017/db
+      - PORT=3100
+      - API_CONFEDERATION=http://confederation:3020
+    networks:
+      - tpsuperheroes
+
   confederation:
     build: ./confederation
     ports:
