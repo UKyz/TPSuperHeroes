@@ -4,8 +4,6 @@ const rp = require('request-promise');
 
 const bodyParser = require('body-parser');
 
-const R = require('ramda');
-
 const moment = require('moment');
 
 const app = express();
@@ -24,24 +22,34 @@ const getListCities = async () => {
       `${process.env.SLS_VILLAIN}/countVillainsByCities`, json: true, body:
     listVillains});
 
-  const keepName = R.pipe(R.map(R.prop('name')));
-  const citiesPos = await rp({method: 'POST', uri:
-      `${process.env.SLS_CITY}/getCitiesPos`, json: true, body:
-      await keepName(villainsByCities)});
+  const cities = await rp({method: 'GET', uri:
+      `${process.env.SLS_CITY}/getCities`, json: true});
 
-  villainsByCities.forEach(villain => {
-    citiesPos.forEach(city => {
-      if (villain.name === city.name) {
-        villain.pos = {x: city.latitude, y: city.longitude};
+  cities.forEach(city => {
+    let hasVillain = false;
+    villainsByCities.forEach(elm => {
+      if (elm.name === city.name_) {
+        hasVillain = true;
+        elm.id = city._id;
+        elm.pos = {x: city.latitude_, y: city.longitude_};
       }
     });
+    if (!hasVillain) {
+      villainsByCities.push({
+        id: city._id,
+        name: city.name_,
+        score: 0,
+        pos: {x: city.latitude_, y: city.longitude_}
+      });
+    }
   });
+
   return villainsByCities;
 };
 
 const getListAvailableHeroes = () => {
   return rp(
-    {method: 'GET', uri: `${process.env.SLS_HERO}/getHeroes`});
+    {method: 'GET', uri: `${process.env.SLS_HERO}/getHeroes`, json: true});
 };
 
 const installCities = () => {
@@ -58,6 +66,8 @@ const manageMovesHeroes = async (listCities, listHeroes) => {
   let now = moment();
   const optimisePath = await getOptimisePath(listCities,
     listHeroes[0], []);
+  console.log('optimise res :');
+  console.log(optimisePath);
   optimisePath.distanceTraveled.forEach(city => {
     now = moment(now).add(10, 'ms');
     rp({method: 'POST', uri: `${process.env.SLS_HERO}/addTicket`, json: true,
@@ -72,25 +82,18 @@ const manageMovesHeroes = async (listCities, listHeroes) => {
 };
 
 const getOptimisePath = async (cities, hero, mounts) => {
-  return rp(
-    {method: 'POST', uri: `${process.env.SLS_HERO}/installHero`, json: true,
-      body: {cities, hero, mounts}});
-  /* -- return {
-    idHero: '5c1a25bdc0a259001b6e01f8',
-    distanceTraveled: [
-      {id: '5c1a25bcea43f3001b75889f', name: "Brest", duration: 50},
-      {id: '5c1a25bcea43f3001b7588a0', name: "Lyon", duration: 200}
-    ],
-    score: 15,
-    mountsUsed: []
-  }; */
+  return rp({method: 'POST', uri: `${process.env.SLS_OPTI}/optimisePath`,
+    json: true, body: {cities, hero, mounts}});
 };
 
 const main = () => {
   setInterval(async () => {
     const listAvailableHeroes = await getListAvailableHeroes();
-    if (listAvailableHeroes.length > 0) {
-      const listCityVillain = await getListCities();
+    const listCityVillain = await getListCities();
+    console.log('Test ici : ');
+    console.log(listAvailableHeroes);
+    console.log(listCityVillain);
+    if (listAvailableHeroes.length > 0 && listCityVillain.length > 0) {
       await manageMovesHeroes(listCityVillain, listAvailableHeroes);
     }
   }, 10000);
