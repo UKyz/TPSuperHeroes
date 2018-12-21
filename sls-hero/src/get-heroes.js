@@ -8,7 +8,6 @@ const curryHeroes = R.curry((list, p) => {
   return {id: p._id, name: p.name_, pos: p.pos_};
 });
 const propHeroes = list => R.map(curryHeroes(list), list);
-
 const filterPropsHeroes = R.pipe(propHeroes);
 
 const getHeroes = async () => {

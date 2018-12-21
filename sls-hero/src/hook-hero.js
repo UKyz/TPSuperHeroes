@@ -7,7 +7,6 @@ const rp = require('request-promise');
 const {getTickets} = require('./get-to-do-list');
 
 const getCity = idCity => {
-  console.log(idCity);
   return new Promise((resolve => {
     resolve(rp({method: 'POST', uri:
 				`${process.env.SLS_CITY}/getCity`, json: true, body:
@@ -17,8 +16,6 @@ const getCity = idCity => {
 
 const updatePosHero = (idHero, cityName, moving) => {
   return new Promise((resolve => {
-    console.log('cityName');
-    console.log(cityName);
     mongoose.connect(process.env.DB, {useNewUrlParser: true});
     const heroSchema = require('../model/hero').schema;
     const HeroModel = mongoose.model('heroModel', heroSchema);
@@ -53,7 +50,6 @@ const addScoreToHero = (idHero, score) => {
 };
 
 const deleteTicket = idTicket => {
-  console.log('je le fais ');
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const toDoListSchema = require('../model/to-do-list').schema;
   const ToDoListModel = mongoose.model('toDoListModel', toDoListSchema);
@@ -68,12 +64,7 @@ const updateDurationTicket = (idTicket, duration) => {
 };
 
 const computeNewUpdate = async (idHero, lastUpdate, toDoList) => {
-  console.log('Test 3 :');
-  console.log(idHero);
-  console.log(lastUpdate);
-  console.log(toDoList);
   if (lastUpdate[0] !== undefined) {
-    console.log('je suis ici');
     const updateHero = moment(lastUpdate[0].date_);
     let nbSeconds =
 			(-moment.duration(moment(updateHero).diff(moment())).asSeconds());
@@ -82,7 +73,6 @@ const computeNewUpdate = async (idHero, lastUpdate, toDoList) => {
     while (nbSeconds > 0 && cpt < toDoList.length && enoughTime) {
       const ticket = toDoList[cpt];
       if (nbSeconds >= ticket.duration_) {
-        console.log('enough time');
         getCity(ticket.idCity_).then(city => {
           updatePosHero(idHero, city.name_, false);
           deleteAllVillains(city.name_).then(score => {
@@ -94,7 +84,6 @@ const computeNewUpdate = async (idHero, lastUpdate, toDoList) => {
         deleteTicket(ticket._id);
       } else {
         enoughTime = false;
-        console.log('not enough time');
         getHero(idHero).then(hero => {
           if (!hero.moving_) {
             getCity(ticket.idCity_).then(city => {
@@ -124,6 +113,7 @@ const getLastUpdate = idHero => {
 };
 
 const hookHero = async idHero => {
+  console.log(`hookHero of ${idHero}`);
   await computeNewUpdate(idHero, await getLastUpdate(idHero),
     await getTickets(idHero));
   mongoose.connect(process.env.DB, {useNewUrlParser: true});

@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const {Hero} = require('../class/hero.js');
 
-const addHero = async name => {
+const addHero = name => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const heroSchema = require('../model/hero').schema;
   const HeroModel = mongoose.model('heroModel', heroSchema);
-  await new HeroModel(new Hero(name)).save();
-  return 'OK';
+  console.log(`Creation of ${name}`);
+  return new HeroModel(new Hero(name)).save();
 };
 
 const addHeroHandler = async msg => ({
