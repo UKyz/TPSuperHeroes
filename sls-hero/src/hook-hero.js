@@ -7,21 +7,20 @@ const rp = require('request-promise');
 const {getTickets} = require('./get-to-do-list');
 
 const getCity = idCity => {
-  return new Promise((resolve => {
-    resolve(rp({method: 'POST', uri:
-				`${process.env.SLS_CITY}/getCity`, json: true, body:
-				{idCity}}));
-  }));
+  return new Promise(resolve => {
+    resolve(rp({method: 'POST', uri: `${process.env.SLS_CITY}/getCity`,
+      json: true, body: {idCity}}));
+  });
 };
 
 const updatePosHero = (idHero, cityName, moving) => {
-  return new Promise((resolve => {
+  return new Promise(resolve => {
     mongoose.connect(process.env.DB, {useNewUrlParser: true});
     const heroSchema = require('../model/hero').schema;
     const HeroModel = mongoose.model('heroModel', heroSchema);
     resolve(HeroModel.findByIdAndUpdate(idHero, {pos_: cityName.toString(),
       moving_: moving}).exec());
-  }));
+  });
 };
 
 const deleteAllVillains = cityName => {
@@ -33,19 +32,18 @@ const deleteAllVillains = cityName => {
 };
 
 const getHero = idHero => {
-  return new Promise((resolve => {
+  return new Promise(resolve => {
     mongoose.connect(process.env.DB, {useNewUrlParser: true});
     const heroSchema = require('../model/hero').schema;
     const HeroModel = mongoose.model('heroModel', heroSchema);
     resolve(HeroModel.findById(idHero).exec());
-  }));
+  });
 };
 
 const addScoreToHero = (idHero, score) => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const heroSchema = require('../model/hero').schema;
   const HeroModel = mongoose.model('heroModel', heroSchema);
-  // Const myHero = await HeroModel.findById(idHero).exec();
   HeroModel.findByIdAndUpdate(idHero, {score_: score}).exec();
 };
 
