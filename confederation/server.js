@@ -9,6 +9,9 @@ const getListCities = async () => {
       `${process.env.SLS_VILLAIN}/countVillainsByCities`, json: true, body:
     listVillains});
 
+  console.log('Villains detected : ');
+  console.log(villainsByCities);
+
   const cities = await rp({method: 'GET', uri:
       `${process.env.SLS_CITY}/getCities`, json: true});
 
