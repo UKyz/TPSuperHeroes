@@ -13,7 +13,7 @@ const getCitiesToInstall = () => {
     new City('Strasbourg', '48.57', '7.75'),
     new City('Nantes', '47.22', '-1.55'),
     new City('Bordeaux', '44.84', '-0.58'),
-    new City('Montpellier', '48.57', '7.75')
+    new City('Dijon', '47.32', '5.04')
   ];
 };
 
