@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const {Mount} = require('../class/mount.js');
 
-const addMount = async name => {
+const addMount = async position => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const mountSchema = require('../model/mount').schema;
   const MountModel = mongoose.model('mountModel', mountSchema);
-  await new MountModel(new Mount(name)).save();
+  await new MountModel(new Mount(position)).save();
   return 'OK';
 };
 

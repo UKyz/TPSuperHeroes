@@ -10,10 +10,15 @@ functions:
     events:
       - http: POST /newMount
 
-  getMountes:
+  getMounts:
     handler: src/get-mounts.getMountsAvailableHandler
     events:
       - http: GET /getMounts
+
+  removeMounts:
+    handler: src/remove-mounts.removeMountsHandler
+    events:
+      - http: POST /removeMounts
 
 plugins:
 - serverless-offline
