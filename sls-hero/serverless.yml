@@ -15,6 +15,11 @@ functions:
     events:
       - http: GET /getHeroes
 
+  getHeroesFront:
+    handler: src/get-heroes-front.getHeroesAvailableHandlerForFront
+    events:
+      - http: GET /getHeroesFront
+
   intallHero:
     handler: src/install-hero.installHeroHandler
     events:
