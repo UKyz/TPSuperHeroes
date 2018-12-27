@@ -21,15 +21,18 @@ const newVillain = (name, city) => {
   });
 };
 
-const addVillain = name => {
-  return getRandomCity().then(city => {
-    newVillain(name, city);
-  });
+const addVillain = objVillain => {
+  if (!Object.prototype.hasOwnProperty.call(objVillain, 'city')) {
+    return getRandomCity().then(city => {
+      newVillain(objVillain.name, city);
+    });
+  }
+  return newVillain(objVillain.name, objVillain.city);
 };
 
 const addVillainHandler = async msg => ({
   status: 200,
-  body: JSON.stringify(await addVillain(JSON.parse(msg.body).name))
+  body: JSON.stringify(await addVillain(JSON.parse(msg.body)))
 });
 
 module.exports = {

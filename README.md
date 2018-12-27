@@ -27,13 +27,19 @@ docker-compose down
 
 ## Contribute 
 ### Execute the tests
-  This project is based on the BDD method. Every classes has a test file to test what's required to be executed. The test can also show a bogue when the class is modified. [(See what BDD is)][BDDWiki]
+  This project is based on the BDD method. Every files has a test file to test 
+  what's required to be executed. The test can also show a bogue when the 
+  file is modified. [(See what BDD is)][BDDWiki]
   
-  To test every classes : 
+  To test : 
   
-```bash
-mocha
-```
+ ```bash
+ docker-compose -f docker-compose.test.yml up --build
+ ```
+ 
+  ```bash
+  mocha
+  ```
 
 ### Check the code style
   This project uses the framework xojs. xojs is a ESLint wrapper that enforce strict and readable code. Everything works fine with xo [(See what xo is)][xo], if you want to check xo you just need to execute : 
