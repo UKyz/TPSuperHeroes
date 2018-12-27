@@ -10,8 +10,6 @@ services:
       - DB=mongodb://db:27017/db
       - PORT=3050
       - API_CONFEDERATION=http://confederation:3020
-    networks:
-      - tpsuperheroes
 
   sls-villain:
     build: ./sls-villain
@@ -24,8 +22,6 @@ services:
     - PORT=3060
     - API_CONFEDERATION=http://confederation:3020
     - SLS_CITY=http://sls-city:3000
-    networks:
-    - tpsuperheroes
 
   sls-hero:
     build: ./sls-hero
@@ -39,8 +35,6 @@ services:
     - API_CONFEDERATION=http://confederation:3020
     - SLS_CITY=http://sls-city:3000
     - SLS_VILLAIN=http://sls-villain:3000
-    networks:
-    - tpsuperheroes
 
   sls-mount:
     build: ./sls-mount
@@ -52,8 +46,6 @@ services:
       - DB=mongodb://db:27017/db
       - PORT=3080
       - API_CONFEDERATION=http://confederation:3020
-    networks:
-      - tpsuperheroes
 
   sls-city:
     build: ./sls-city
@@ -65,28 +57,8 @@ services:
     - DB=mongodb://db:27017/db
     - PORT=3060
     - API_CONFEDERATION=http://confederation:3020
-    networks:
-    - tpsuperheroes
-
-  confederation:
-    build: ./confederation
-    ports:
-    - "3020:3020"
-    environment:
-    - PORT=3020
-    - SLS_VILLAIN=http://sls-villain:3000
-    - SLS_HERO=http://sls-hero:3000
-    - SLS_CITY=http://sls-city:3000
-    - SLS_OPTI=http://sls-path-optimiser:3000
-    networks:
-    - tpsuperheroes
 
   db:
     image: mongo
     ports:
     - "27027:27017"
-    networks:
-      - tpsuperheroes
-
-networks:
-  tpsuperheroes:

@@ -12,13 +12,15 @@
   },
   "dependencies": {
     "bluebird": "^3.5.3",
+    "express": "^4.16.4",
     "moment": "^2.23.0",
     "mongoose": "^5.4.0",
     "promise-each": "^2.2.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "serverless": "^1.32.0",
-    "serverless-offline": "^3.31.3"
+    "serverless-offline": "^3.31.3",
+    "supertest": "^3.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

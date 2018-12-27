@@ -1,32 +1,29 @@
 const chai = require('chai');
 
-const {Hero} = require('../sls-hero/class/hero.js');
+const rp = require('request-promise');
 
 chai.should();
 
-describe('city.js', () => {
-  const h1 = new Hero('Robin');
-
-  it('should create a hero', () => {
-    h1.name.should.be.equal('Robin');
-    h1.speed.should.be.equal(0);
-    h1.position.should.be.equal('Paris');
-    h1.score.should.be.equal(0);
+describe('heroes', async () => {
+  it('should be installed with a hero', async () => {
+    await rp({method: 'POST', uri: 'http://localhost:3070/installHero'});
+    const heroes = await rp(
+      {method: 'GET', uri: 'http://localhost:3070/getHeroes', json: true});
+    heroes.length.should.be.equal(1);
+    heroes[0].name.should.be.equal('Robin');
+    heroes[0].pos.should.be.equal('Paris');
   });
 
-  it('should change the score of a hero', () => {
-    h1.noPainNoGain(10);
-    h1.score.should.be.equal(10);
-  });
-
-  it('should change the position of a hero', () => {
-    h1.changePosition('Lille');
-    h1.position.should.be.equal('Lille');
-  });
-
-  it('should change the speed of a hero', () => {
-    h1.setSpeed(5);
-    h1.speed.should.be.equal(5);
+  it('should create a new hero', async () => {
+    await rp({method: 'POST', uri: 'http://localhost:3070/newHero', json: true,
+      body: {name: 'Superman'}});
+    const heroes = await rp(
+      {method: 'GET', uri: 'http://localhost:3070/getHeroes', json: true});
+    heroes.length.should.be.equal(2);
+    heroes[0].name.should.be.equal('Robin');
+    heroes[0].pos.should.be.equal('Paris');
+    heroes[1].name.should.be.equal('Superman');
+    heroes[1].pos.should.be.equal('Paris');
   });
 });
 
