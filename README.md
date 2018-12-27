@@ -34,16 +34,14 @@ docker-compose down
   To test :
   
    * In a first session :
-   
-     ```bash
-     docker-compose -f docker-compose.test.yml up --build
-     ```
-     
+ ```
+ docker-compose -f docker-compose.test.yml up --build
+ ```
    * In a second session :
    
-     ```bash
-     mocha
-     ```
+ ```
+  mocha
+```
 
 ### Check the code style
   This project uses the framework xojs. xojs is a ESLint wrapper that enforce strict and readable code. Everything works fine with xo [(See what xo is)][xo], if you want to check xo you just need to execute : 
