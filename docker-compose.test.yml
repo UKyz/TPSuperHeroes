@@ -1,0 +1,64 @@
+version: '3'
+services:
+  sls-path-optimiser:
+    build: ./sls-path-optimiser
+    ports:
+      - "3050:3000"
+    links:
+      - db
+    environment:
+      - DB=mongodb://db:27017/db
+      - PORT=3050
+      - API_CONFEDERATION=http://confederation:3020
+
+  sls-villain:
+    build: ./sls-villain
+    ports:
+    - "3060:3000"
+    links:
+    - db
+    environment:
+    - DB=mongodb://db:27017/db
+    - PORT=3060
+    - API_CONFEDERATION=http://confederation:3020
+    - SLS_CITY=http://sls-city:3000
+
+  sls-hero:
+    build: ./sls-hero
+    ports:
+    - "3070:3000"
+    links:
+    - db
+    environment:
+    - DB=mongodb://db:27017/db
+    - PORT=3070
+    - API_CONFEDERATION=http://confederation:3020
+    - SLS_CITY=http://sls-city:3000
+    - SLS_VILLAIN=http://sls-villain:3000
+
+  sls-mount:
+    build: ./sls-mount
+    ports:
+      - "3080:3000"
+    links:
+      - db
+    environment:
+      - DB=mongodb://db:27017/db
+      - PORT=3080
+      - API_CONFEDERATION=http://confederation:3020
+
+  sls-city:
+    build: ./sls-city
+    ports:
+    - "3090:3000"
+    links:
+    - db
+    environment:
+    - DB=mongodb://db:27017/db
+    - PORT=3060
+    - API_CONFEDERATION=http://confederation:3020
+
+  db:
+    image: mongo
+    ports:
+    - "27027:27017"

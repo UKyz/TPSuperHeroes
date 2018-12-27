@@ -22,7 +22,7 @@ const getHeroes = async () => {
   heroes.forEach(async hero => {
     await hookHero(hero._id);
   });
-  heroes = await HeroModel.find({moving_: false}).exec();
+  heroes = await HeroModel.find({}).exec();
   return filterPropsHeroes(heroes);
 };
 

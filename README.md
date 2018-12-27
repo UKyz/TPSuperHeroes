@@ -27,12 +27,20 @@ docker-compose down
 
 ## Contribute 
 ### Execute the tests
-  This project is based on the BDD method. Every classes has a test file to test what's required to be executed. The test can also show a bogue when the class is modified. [(See what BDD is)][BDDWiki]
+  This project is based on the BDD method. Every files has a test file to test 
+  what's required to be executed. The test can also show a bogue when the 
+  file is modified. [(See what BDD is)][BDDWiki]
   
-  To test every classes : 
-  
-```bash
-mocha
+  To test :
+  
+   * In a first session :
+ ```
+ docker-compose -f docker-compose.test.yml up --build
+ ```
+   * In a second session :
+   
+ ```
+  mocha
 ```
 
 ### Check the code style
