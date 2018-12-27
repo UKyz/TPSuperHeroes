@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "scripts": {
-    "start": "mocha ./hero-test.js"
-  },
   "dependencies": {
     "chai": "^4.2.0",
     "express": "^4.16.4",
     "mocha": "^5.2.0",
+    "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "supertest": "^3.3.0"
   }
