@@ -31,12 +31,16 @@ docker-compose down
   what's required to be executed. The test can also show a bogue when the 
   file is modified. [(See what BDD is)][BDDWiki]
   
-  To test : 
-   * In a first session : 
+  To test :
+  
+   * In a first session :
+   
      ```bash
      docker-compose -f docker-compose.test.yml up --build
      ```
+     
    * In a second session :
+   
      ```bash
      mocha
      ```
