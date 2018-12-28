@@ -50,18 +50,25 @@ const installHero = () => {
   return rp({method: 'POST', uri: `${process.env.SLS_HERO}/installHero`});
 };
 
-const manageMovesHeroes = async (listCities, listHeroes) => {
+const manageMovesHeroes = async (listCities, listHeroes, listMounts) => {
   let now = moment();
-  const optimisePath = await getOptimisePath(listCities, listHeroes[0], []);
-  optimisePath.distanceTraveled.forEach(city => {
-    now = moment(now).add(10, 'ms');
-    rp({method: 'POST', uri: `${process.env.SLS_HERO}/addTicket`, json: true,
-      body: {
-        idHero_: optimisePath.idHero,
-        idCity_: city.id,
-        duration_: city.duration,
-        dateCreation_: now.format('YYYY-MM-DD HH:mm:ss:SS')
-      }
+  listHeroes.forEach(async hero => {
+    const optimisePath = await getOptimisePath(listCities, hero, listMounts);
+    optimisePath.distanceTraveled.forEach(city => {
+      now = moment(now).add(10, 'ms');
+      rp({method: 'POST', uri: `${process.env.SLS_HERO}/addTicket`, json: true,
+        body: {
+          idHero_: optimisePath.idHero,
+          idCity_: city.id,
+          duration_: city.duration,
+          dateCreation_: now.format('YYYY-MM-DD HH:mm:ss:SS')
+        }
+      });
+      listCities.forEach(cityVillain => {
+        if (cityVillain.id === city.id) {
+          cityVillain.score = 0;
+        }
+      });
     });
   });
 };
@@ -75,8 +82,9 @@ const main = () => {
   setInterval(async () => {
     const listAvailableHeroes = await getListAvailableHeroes();
     const listCityVillain = await getListCities();
+    const listMounts = [];
     if (listAvailableHeroes.length > 0 && listCityVillain.length > 0) {
-      await manageMovesHeroes(listCityVillain, listAvailableHeroes);
+      await manageMovesHeroes(listCityVillain, listAvailableHeroes, listMounts);
     }
   }, 30000);
 };

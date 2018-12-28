@@ -6,7 +6,7 @@ const installHero = () => {
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const heroSchema = require('../model/hero').schema;
   const HeroModel = mongoose.model('heroModel', heroSchema);
-  const hero1 = new Hero('Robin');
+  const hero1 = new Hero({name: 'Robin'});
   return new HeroModel(hero1).save();
 };
 
