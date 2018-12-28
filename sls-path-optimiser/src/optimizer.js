@@ -39,10 +39,10 @@ const optimizePath = (cities, mounts, hero) => {
         solution.distanceTraveled.push(
           {id: cityA.id, name: cityA.name, duration: distanceCounter});
         if (mountsOnCityA.length > 0) { // If there are mounts available
-          distanceCounter += distance(cityA, cityB) / 4;
+          distanceCounter += (distance(cityA, cityB) / hero.speed) / 4;
           solution.mountsUsed.push(R.head(mountsOnCityA));
         } else {
-          distanceCounter += distance(cityA, cityB);
+          distanceCounter += distance(cityA, cityB) / hero.speed;
         }
         if (R.not(R.includes(cityA.name, R.slice(0, i, solution.path)))) {
           solution.score += cityA.score; // Avoid counting twice the score of a
@@ -103,17 +103,21 @@ const optimizePath = (cities, mounts, hero) => {
   )(numberOfParents);
 
   const T = 3;
-  const previousResultT2 = R.map(() => 0, R.range(0, T));
+  const previousResultT = R.map(() => 0, R.range(0, T));
 
   const {iterationMax, iterationMin, maxDistance} = process.env;
-
+  console.log('info:');
+  console.log(iterationMin);
+  console.log(iterationMax);
+  console.log(maxDistance);
+  console.log(hero);
   // Création des parents
   let parents = createParents(4, maxDistance);
   let i;
   for (i = 0; i < iterationMax; i++) {
     parents = optimiseParents(parents, maxDistance);
-    previousResultT2[i % T] = R.prop('score', R.head(parents));
-    if (isAllSame(previousResultT2) && i > iterationMin) {
+    previousResultT[i % T] = R.prop('score', R.head(parents));
+    if (isAllSame(previousResultT) && i > iterationMin) {
       break;
     }
   }

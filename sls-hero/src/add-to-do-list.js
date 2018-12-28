@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 
 const addTicket = ticket => {
-  if (!Object.prototype.hasOwnProperty.call(ticket, 'duration_')) {
-    ticket.duration_ = moment().format('YYYY-MM-DD HH:mm:ss:SS');
+  if (!Object.prototype.hasOwnProperty.call(ticket, 'dateCreation_')) {
+    ticket.dateCreation_ = moment().format('YYYY-MM-DD HH:mm:ss:SS');
   }
   console.log('addTicket : ');
   console.log(ticket);
