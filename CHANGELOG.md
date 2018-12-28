@@ -1,6 +1,28 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2018-12-28
+### Added
+- docker-compose.test which manage servers as docker-compose do without confederation's server
+
+Sls-hero :
+- function that gets, modifies the format and returns every heros for the front-end
+
+Sls-mount :
+- function that takes an mount's id in argument and remove the mount from the db
+
+### Changed
+- Cleaning most of the files and promisify some awaits 
+
+Sls-villain :
+- function that adds a new villain in db now can takes a city's name as argument in addition of villain's name
+
+Test :
+- tests are now OK and test almost all the handlers from the sls
+
+Confederation :
+- update some functions to handle more than one hero at the same time
+
 ## [1.0.0] - 2018-12-21
 ### Added
 - docker-compose which manages 5 sls, 1 mongoDB and 1 server
@@ -58,3 +80,4 @@ Confederation :
 
 
 [1.0.0]: https://github.com/UKyz/TPSuperHeroes/tree/v1.0.0
+[1.0.1]: https://github.com/UKyz/TPSuperHeroes/tree/v1.0.1
