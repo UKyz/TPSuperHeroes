@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
+const moment = require('moment');
+
 const addTicket = ticket => {
+  if (!Object.prototype.hasOwnProperty.call(ticket, 'duration_')) {
+    ticket.duration_ = moment().format('YYYY-MM-DD HH:mm:ss:SS');
+  }
   console.log('addTicket : ');
   console.log(ticket);
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
