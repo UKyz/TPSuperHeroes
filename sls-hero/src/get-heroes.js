@@ -5,7 +5,7 @@ const R = require('ramda');
 const {hookHero} = require('./hook-hero');
 
 const curryHeroes = R.curry((list, p) => {
-  return {id: p._id, name: p.name_, pos: p.pos_};
+  return {id: p._id, name: p.name_, pos: p.pos_, speed: p.speed_};
 });
 const propHeroes = list => R.map(curryHeroes(list), list);
 const filterPropsHeroes = R.pipe(propHeroes);

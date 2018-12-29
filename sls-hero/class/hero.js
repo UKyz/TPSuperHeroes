@@ -1,7 +1,7 @@
 class Hero {
   constructor(hero) {
     this.name_ = hero.name || 'UNKHERO';
-    this.speed_ = 0;
+    this.speed_ = 0.5;
     this.pos_ = hero.city || 'Paris';
     this.score_ = 0;
     this.moving_ = false;
