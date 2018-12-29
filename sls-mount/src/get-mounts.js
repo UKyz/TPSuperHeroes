@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 
-const getMounts = () => {
+const {hookMount} = require('./hook-mounts');
+
+const getMounts = async () => {
+  await hookMount(10);
   mongoose.connect(process.env.DB, {useNewUrlParser: true});
   const mountSchema = require('../model/mount').schema;
   const MountModel = mongoose.model('mountModel', mountSchema);
-  return MountModel.find({pos_: {$not: /move/i}},
-    (err, mounts) => {
-      if (err) {
-        return console.error(err);
-      }
-      return mounts;
-    });
+  return MountModel.find({}).exec();
 };
 
 const getMountsAvailableHandler = async () => ({
