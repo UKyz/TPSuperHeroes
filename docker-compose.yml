@@ -78,6 +78,7 @@ services:
     - SLS_VILLAIN=http://sls-villain:3000
     - SLS_HERO=http://sls-hero:3000
     - SLS_CITY=http://sls-city:3000
+    - SLS_MOUNT=http://sls-mount:3000
     - SLS_OPTI=http://sls-path-optimiser:3000
     networks:
     - tpsuperheroes

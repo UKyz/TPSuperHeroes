@@ -2,6 +2,8 @@ const rp = require('request-promise');
 
 const moment = require('moment');
 
+const R = require('ramda');
+
 const getListCities = async () => {
   const listVillains = await rp({uri: `${process.env.SLS_VILLAIN}/getVillains`,
     json: true});
@@ -37,6 +39,11 @@ const getListCities = async () => {
   return villainsByCities;
 };
 
+const getListAvailableMounts = () => {
+  return rp(
+    {method: 'GET', uri: `${process.env.SLS_MOUNT}/getMounts`, json: true});
+};
+
 const getListAvailableHeroes = () => {
   return rp(
     {method: 'GET', uri: `${process.env.SLS_HERO}/getHeroes`, json: true});
@@ -48,6 +55,13 @@ const installCities = () => {
 
 const installHero = () => {
   return rp({method: 'POST', uri: `${process.env.SLS_HERO}/installHero`});
+};
+
+const removeMounts = idTab => {
+  return rp({
+    method: 'POST', uri: `${process.env.SLS_MOUNT}/removeMounts`, json: true,
+    body: idTab
+  });
 };
 
 const manageMovesHeroes = async (listCities, listHeroes, listMounts) => {
@@ -70,6 +84,8 @@ const manageMovesHeroes = async (listCities, listHeroes, listMounts) => {
         }
       });
     });
+    const mountsToDelete = R.map(R.prop('id'), optimisePath.mountsUsed);
+    removeMounts(mountsToDelete);
   });
 };
 
@@ -82,7 +98,7 @@ const main = () => {
   setInterval(async () => {
     const listAvailableHeroes = await getListAvailableHeroes();
     const listCityVillain = await getListCities();
-    const listMounts = [];
+    const listMounts = await getListAvailableMounts();
     if (listAvailableHeroes.length > 0 && listCityVillain.length > 0) {
       await manageMovesHeroes(listCityVillain, listAvailableHeroes, listMounts);
     }
