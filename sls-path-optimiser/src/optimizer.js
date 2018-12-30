@@ -39,7 +39,7 @@ const optimizePath = (cities, mounts, hero) => {
         solution.distanceTraveled.push(
           {id: cityA.id, name: cityA.name, duration: distanceCounter});
         if (mountsOnCityA.length > 0) { // If there are mounts available
-          distanceCounter += (distance(cityA, cityB) / hero.speed) / 4;
+          distanceCounter += (distance(cityA, cityB) / hero.speed) / 2;
           solution.mountsUsed.push(R.head(mountsOnCityA));
         } else {
           distanceCounter += distance(cityA, cityB) / hero.speed;
@@ -106,11 +106,6 @@ const optimizePath = (cities, mounts, hero) => {
   const previousResultT = R.map(() => 0, R.range(0, T));
 
   const {iterationMax, iterationMin, maxDistance} = process.env;
-  console.log('info:');
-  console.log(iterationMin);
-  console.log(iterationMax);
-  console.log(maxDistance);
-  console.log(hero);
   // Création des parents
   let parents = createParents(4, maxDistance);
   let i;
