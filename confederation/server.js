@@ -82,22 +82,21 @@ const manageMovesHeroes = async (listCities, listHeroes, listMounts) => {
   let optimiseRes = [];
   await listHeroes.reduce(async (promise, hero) => {
     await promise;
-    await updateListCities(listCities, optimiseRes).then(async newCities => {
-      await getOptimisePath(newCities, hero, listMounts).then(async res => {
-        const mountsToDelete = R.map(R.prop('id'), res.mountsUsed);
-        await removeMounts(mountsToDelete).then(() => {
-          optimiseRes = res.distanceTraveled;
-          optimiseRes.forEach(city => {
-            now = moment(now).add(10, 'ms');
-            rp({method: 'POST', uri: `${process.env.SLS_HERO}/addTicket`,
-              json: true, body: {
-                idHero_: res.idHero,
-                idCity_: city.id,
-                duration_: city.duration,
-                dateCreation_: now.format('YYYY-MM-DD HH:mm:ss:SS'),
-                mountUsed_: city.mountUsed
-              }
-            });
+    await getOptimisePath(listCities, optimiseRes, hero,
+      listMounts).then(async res => {
+      const mountsToDelete = R.map(R.prop('id'), res.mountsUsed);
+      await removeMounts(mountsToDelete).then(() => {
+        optimiseRes = res.distanceTraveled;
+        optimiseRes.forEach(city => {
+          now = moment(now).add(10, 'ms');
+          rp({method: 'POST', uri: `${process.env.SLS_HERO}/addTicket`,
+            json: true, body: {
+              idHero_: res.idHero,
+              idCity_: city.id,
+              duration_: city.duration,
+              dateCreation_: now.format('YYYY-MM-DD HH:mm:ss:SS'),
+              mountUsed_: city.mountUsed
+            }
           });
         });
       });
@@ -105,10 +104,16 @@ const manageMovesHeroes = async (listCities, listHeroes, listMounts) => {
   }, Promise.resolve());
 };
 
-const getOptimisePath = async (cities, hero, mounts) => new Promise(resolve => {
-  resolve(rp({method: 'POST', uri: `${process.env.SLS_OPTI}/optimisePath`,
-    json: true, body: {cities, hero, mounts}}));
-});
+const getOptimisePath = async (listCities, optimiseRes, hero, mounts) => {
+  return new Promise(resolve => {
+    updateListCities(listCities, optimiseRes).then(cities => {
+      resolve(rp({
+        method: 'POST', uri: `${process.env.SLS_OPTI}/optimisePath`,
+        json: true, body: {cities, hero, mounts}
+      }));
+    });
+  });
+};
 
 const main = () => {
   setInterval(async () => {
