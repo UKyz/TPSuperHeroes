@@ -1,16 +1,22 @@
 # TPSuperHeroes 
 
 [![version][version-badge]][CHANGELOG] [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
-
 ## Contents
-  * [Install][Installation]
-  * [Contribute][Contribute]
-  * [Stop][Stop]
-    * [Execute the tests][CheckTests]
-    * [Check the code style][CheckXo]
-  * [Credits][Credits]
+- [Setting up](#setting-up)
+  - [Prerequisites](#prerequisites)
+  - [Install and run](#install-and-run)
+- [Stop and remove containers](#stop-and-remove-containers)
+- [Data visualization](#data-visualization)
+- [Contribute](#contribute)
+  - [Execute the tests](#execute-the-tests)
 
-## Install
+## Setting up
+
+### Prerequisites
+To be able to launch our project it is necessary to have the following elements:
+- [Docker](https://docs.docker.com/v17.12/install/)
+
+### Install and run
 
 ```bash
 git clone https://github.com/UKyz/TPSuperHeroes.git
@@ -24,6 +30,11 @@ docker-compose up
 ```bash
 docker-compose down
 ```
+
+## Data visualization
+A web interface was created to visualize the heroes on a map and the statues of cities and heroes on a legend. It is visible via the following address:
+
+http://localhost:4200/
 
 ## Contribute 
 ### Execute the tests
