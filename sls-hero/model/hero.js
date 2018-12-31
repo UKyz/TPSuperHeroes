@@ -7,7 +7,8 @@ const heroSchema = new Schema({
   speed_: Number,
   pos_: String,
   score_: Number,
-  moving_: Boolean
+  moving_: Boolean,
+  isMovingWithAMount_: Boolean
 });
 
 module.exports = {

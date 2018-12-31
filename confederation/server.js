@@ -94,7 +94,8 @@ const manageMovesHeroes = async (listCities, listHeroes, listMounts) => {
                 idHero_: res.idHero,
                 idCity_: city.id,
                 duration_: city.duration,
-                dateCreation_: now.format('YYYY-MM-DD HH:mm:ss:SS')
+                dateCreation_: now.format('YYYY-MM-DD HH:mm:ss:SS'),
+                mountUsed_: city.mountUsed
               }
             });
           });

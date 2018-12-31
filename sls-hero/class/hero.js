@@ -5,6 +5,7 @@ class Hero {
     this.pos_ = hero.city || 'Paris';
     this.score_ = 0;
     this.moving_ = false;
+    this.isMovingWithAMount_ = false;
   }
 
   get name() {

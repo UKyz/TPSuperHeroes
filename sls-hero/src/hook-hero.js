@@ -13,13 +13,13 @@ const getCity = idCity => {
   });
 };
 
-const updatePosHero = (idHero, cityName, moving) => {
+const updatePosHero = (idHero, cityName, moving, mountUsed) => {
   return new Promise(resolve => {
     mongoose.connect(process.env.DB, {useNewUrlParser: true});
     const heroSchema = require('../model/hero').schema;
     const HeroModel = mongoose.model('heroModel', heroSchema);
     resolve(HeroModel.findByIdAndUpdate(idHero, {pos_: cityName.toString(),
-      moving_: moving}).exec());
+      moving_: moving, isMovingWithAMount_: mountUsed}).exec());
   });
 };
 
@@ -72,7 +72,7 @@ const computeNewUpdate = async (idHero, lastUpdate, toDoList) => {
       const ticket = toDoList[cpt];
       if (nbSeconds >= ticket.duration_) {
         getCity(ticket.idCity_).then(city => {
-          updatePosHero(idHero, city.name_, false);
+          updatePosHero(idHero, city.name_, false, false);
           deleteAllVillains(city.name_).then(score => {
             getHero(idHero).then(hero => {
               addScoreToHero(idHero, (score.nbVillainsDeleted + hero.score_));
@@ -85,7 +85,8 @@ const computeNewUpdate = async (idHero, lastUpdate, toDoList) => {
         getHero(idHero).then(hero => {
           if (!hero.moving_) {
             getCity(ticket.idCity_).then(city => {
-              updatePosHero(idHero, `${hero.pos_}move${city.name_}`, true);
+              updatePosHero(idHero, `${hero.pos_}move${city.name_}`, true,
+                ticket.mountUsed_);
             });
           }
         });
