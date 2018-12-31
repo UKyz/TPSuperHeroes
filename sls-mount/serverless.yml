@@ -15,6 +15,11 @@ functions:
     events:
       - http: GET /getMounts
 
+  getMountsPerCity:
+    handler: src/get-mounts-per-city.getMountsPerCityeHandler
+    events:
+      - http: GET /getMountsPerCity
+
   removeMounts:
     handler: src/remove-mounts.removeMountsHandler
     events:
