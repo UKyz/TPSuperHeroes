@@ -9,7 +9,8 @@ const getHero = hero => ({
   pos: hero.pos_,
   speed: hero.speed_,
   score: hero.score_,
-  moving: hero.moving_
+  moving: hero.moving_,
+  mountUsed: hero.isMovingWithAMount_
 });
 
 const filterPropsHeroes = list => R.map(getHero, list);
