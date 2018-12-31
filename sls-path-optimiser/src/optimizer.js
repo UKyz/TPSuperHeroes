@@ -36,12 +36,24 @@ const optimizePath = (cities, mounts, hero) => {
         const mountsByNow = R.difference(mounts, solution.mountsUsed);
         const mountsOnCityA = R.filter(x => R.equals(x.pos, cityA.name),
           mountsByNow);
-        solution.distanceTraveled.push(
-          {id: cityA.id, name: cityA.name, duration: distanceCounter});
         if (mountsOnCityA.length > 0) { // If there are mounts available
+          solution.distanceTraveled.push(
+            {
+              id: cityA.id,
+              name: cityA.name,
+              duration: distanceCounter,
+              mountUsed: true
+            });
           distanceCounter += (distance(cityA, cityB) / hero.speed) / 2;
           solution.mountsUsed.push(R.head(mountsOnCityA));
         } else {
+          solution.distanceTraveled.push(
+            {
+              id: cityA.id,
+              name: cityA.name,
+              duration: distanceCounter,
+              mountUsed: false
+            });
           distanceCounter += distance(cityA, cityB) / hero.speed;
         }
         if (R.not(R.includes(cityA.name, R.slice(0, i, solution.path)))) {
