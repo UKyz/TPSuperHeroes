@@ -82,4 +82,4 @@ xo
 [CheckXo]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#check-the-code-style
 [CheckTests]: https://github.com/UKyz/TPSuperHeroes/blob/master/README.md#execute-the-tests
 [BDDWiki]: https://en.wikipedia.org/wiki/Behavior-driven_development
-[version-badge]: https://img.shields.io/badge/version-1.0.1-blue.svg
+[version-badge]: https://img.shields.io/badge/version-1.1.0-blue.svg
