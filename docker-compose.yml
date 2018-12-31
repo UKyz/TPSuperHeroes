@@ -75,10 +75,6 @@ services:
       - "4200:4200"
     expose:
       - "4200"
-    environment:
-      - DB=mongodb://db:27017/db
-      - PORT=3060
-      - API_CONFEDERATION=http://confederation:3020
     networks:
       - tpsuperheroes
 
