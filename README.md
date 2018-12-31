@@ -5,15 +5,17 @@
 - [Setting up](#setting-up)
   - [Prerequisites](#prerequisites)
   - [Install and run](#install-and-run)
-- [Stop and remove containers](#stop-and-remove-containers)
-- [Data visualization](#data-visualization)
+  - [Data visualization](#data-visualization)
+  - [Stop and remove containers](#stop-and-remove-containers)
 - [Contribute](#contribute)
   - [Execute the tests](#execute-the-tests)
+  - [Check the code style](#check-the-code-style)
+- [Credits](#credits)
 
 ## Setting up
 
 ### Prerequisites
-To be able to launch our project it is necessary to have the following elements:
+To be able to launch our project, it is necessary to have the following elements:
 - [Docker](https://docs.docker.com/v17.12/install/)
 
 ### Install and run
@@ -25,16 +27,16 @@ git submodule update --init map-front
 docker-compose up
 ```
 
+## Data visualization
+A web interface was created to visualize the heroes on a map, statues of cities and heroes on a legend. It is visible via the following address:
+
+http://localhost:4200/
+
 ## Stop and remove containers
 
 ```bash
 docker-compose down
 ```
-
-## Data visualization
-A web interface was created to visualize the heroes on a map and the statues of cities and heroes on a legend. It is visible via the following address:
-
-http://localhost:4200/
 
 ## Contribute 
 ### Execute the tests
@@ -55,7 +57,7 @@ http://localhost:4200/
 ```
 
 ### Check the code style
-  This project uses the framework xojs. xojs is a ESLint wrapper that enforce strict and readable code. Everything works fine with xo [(See what xo is)][xo], if you want to check xo you just need to execute : 
+  This project uses the framework xojs. xojs is a ESLint wrapper that enforce strict and readable code. Everything works fine with xo [(See what xo is)][xo], if you want to check xo, you just need to execute : 
   
 ```bash
 xo
