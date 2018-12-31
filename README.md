@@ -15,7 +15,7 @@
 ```bash
 git clone https://github.com/UKyz/TPSuperHeroes.git
 cd TPSuperHeroes
-git submodule update --init ember-map
+git submodule update --init map-front
 docker-compose up
 ```
 

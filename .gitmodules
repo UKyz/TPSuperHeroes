@@ -1,0 +1,3 @@
+[submodule "map-front"]
+	path = map-front
+	url = https://github.com/A1c0/map-front.git
